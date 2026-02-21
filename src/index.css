@@ -6,54 +6,56 @@
 
 @layer base {
   :root {
-    --background: 220 40% 6%;
+    --background: 150 40% 5%;
     --foreground: 45 20% 95%;
 
-    --card: 220 35% 10%;
+    --card: 150 35% 9%;
     --card-foreground: 45 20% 95%;
 
-    --popover: 220 35% 10%;
+    --popover: 150 35% 9%;
     --popover-foreground: 45 20% 95%;
 
     --primary: 42 85% 55%;
-    --primary-foreground: 220 40% 6%;
+    --primary-foreground: 150 40% 5%;
 
-    --secondary: 220 30% 15%;
+    --secondary: 150 30% 13%;
     --secondary-foreground: 45 20% 90%;
 
-    --muted: 220 25% 14%;
-    --muted-foreground: 220 15% 55%;
+    --muted: 150 25% 12%;
+    --muted-foreground: 150 15% 50%;
 
     --accent: 42 70% 45%;
-    --accent-foreground: 220 40% 6%;
+    --accent-foreground: 150 40% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 25% 18%;
-    --input: 220 25% 18%;
+    --border: 150 25% 16%;
+    --input: 150 25% 16%;
     --ring: 42 85% 55%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 220 35% 8%;
+    --sidebar-background: 150 35% 7%;
     --sidebar-foreground: 45 20% 90%;
     --sidebar-primary: 42 85% 55%;
-    --sidebar-primary-foreground: 220 40% 6%;
-    --sidebar-accent: 220 30% 15%;
+    --sidebar-primary-foreground: 150 40% 5%;
+    --sidebar-accent: 150 30% 13%;
     --sidebar-accent-foreground: 45 20% 90%;
-    --sidebar-border: 220 25% 18%;
+    --sidebar-border: 150 25% 16%;
     --sidebar-ring: 42 85% 55%;
 
     /* Custom tokens */
     --gold: 42 85% 55%;
     --gold-light: 42 80% 70%;
     --gold-dark: 42 90% 40%;
-    --navy: 220 40% 6%;
-    --navy-light: 220 35% 12%;
-    --navy-lighter: 220 30% 18%;
-    --glass: 220 30% 15%;
-    --glass-border: 220 25% 25%;
+    --forest: 150 40% 5%;
+    --forest-light: 150 35% 10%;
+    --forest-lighter: 150 30% 16%;
+    --emerald: 155 60% 30%;
+    --beige: 40 30% 85%;
+    --glass: 150 30% 12%;
+    --glass-border: 150 25% 22%;
   }
 }
 
@@ -75,7 +77,7 @@
 @layer components {
   .glass-card {
     @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl;
-    box-shadow: 0 8px 32px 0 hsla(220, 40%, 4%, 0.4);
+    box-shadow: 0 8px 32px 0 hsla(150, 40%, 3%, 0.4);
   }
 
   .gold-glow {
@@ -95,12 +97,12 @@
     background-image: linear-gradient(135deg, hsl(42 90% 40%), hsl(42 85% 55%), hsl(42 80% 65%));
   }
 
-  .navy-gradient {
-    background: linear-gradient(180deg, hsl(220 40% 6%) 0%, hsl(220 35% 10%) 50%, hsl(220 40% 6%) 100%);
+  .forest-gradient {
+    background: linear-gradient(180deg, hsl(150 40% 5%) 0%, hsl(150 35% 9%) 50%, hsl(150 40% 5%) 100%);
   }
 
   .section-gradient {
-    background: linear-gradient(180deg, hsl(220 40% 6%) 0%, hsl(220 35% 9%) 100%);
+    background: linear-gradient(180deg, hsl(150 40% 5%) 0%, hsl(150 35% 8%) 100%);
   }
 
   .shine-sweep {
@@ -134,12 +136,12 @@
   }
   .product-card-hover:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 30px hsla(42, 85%, 55%, 0.2), 0 20px 60px hsla(220, 40%, 4%, 0.5);
+    box-shadow: 0 0 30px hsla(42, 85%, 55%, 0.2), 0 20px 60px hsla(150, 40%, 3%, 0.5);
   }
 
   .scroll-progress {
     @apply fixed top-0 left-0 h-[3px] z-[100];
-    background: linear-gradient(90deg, hsl(42 90% 40%), hsl(42 85% 55%), hsl(42 80% 70%));
+    background: linear-gradient(90deg, hsl(155 60% 30%), hsl(42 85% 55%), hsl(42 80% 70%));
   }
 }
 
@@ -153,10 +155,10 @@ html {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(220 40% 6%);
+  background: hsl(150 40% 5%);
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(220 25% 25%);
+  background: hsl(150 25% 22%);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
