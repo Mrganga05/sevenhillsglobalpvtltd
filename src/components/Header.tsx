@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Products", href: "#products" },
   { label: "Why Us", href: "#why-us" },
+  { label: "Process", href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -35,7 +37,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
-            <span className="text-2xl font-serif font-bold gold-gradient-text">
+            <img src={logo} alt="Seven Hills Global" className="h-14 w-auto" />
+            <span className="text-xl font-serif font-bold gold-gradient-text hidden sm:inline">
               Seven Hills Global
             </span>
           </a>

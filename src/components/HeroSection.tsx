@@ -8,28 +8,29 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroBg}
-          alt="Global shipping port"
+          alt="Indian agriculture and spices"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent" />
       </div>
 
       {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          className="absolute w-1.5 h-1.5 rounded-full"
           style={{
-            top: `${20 + i * 12}%`,
-            left: `${10 + i * 15}%`,
+            top: `${15 + i * 10}%`,
+            left: `${8 + i * 12}%`,
+            background: i % 2 === 0 ? 'hsla(42, 85%, 55%, 0.3)' : 'hsla(155, 60%, 30%, 0.3)',
           }}
           animate={{
             y: [-20, 20, -20],
-            opacity: [0.3, 0.7, 0.3],
+            opacity: [0.2, 0.6, 0.2],
           }}
           transition={{
-            duration: 3 + i * 0.5,
+            duration: 3 + i * 0.4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -45,7 +46,7 @@ const HeroSection = () => {
           className="mb-6"
         >
           <span className="inline-block text-sm font-sans font-semibold tracking-[0.3em] uppercase text-primary/80 border border-primary/30 rounded-full px-6 py-2">
-            Global Transportation & Agricultural Export
+            Premium Agricultural Exports
           </span>
         </motion.div>
 
@@ -55,9 +56,9 @@ const HeroSection = () => {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-6"
         >
-          Delivering India's Finest
+          From Nature's Fields
           <br />
-          <span className="gold-gradient-text">to the World</span>
+          <span className="gold-gradient-text">to Global Markets</span>
         </motion.h1>
 
         <motion.p
@@ -66,8 +67,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto mb-10 font-sans"
         >
-          Global transportation & premium agricultural exports with unmatched
-          reliability. Trusted by businesses across 10+ countries.
+          Premium Indian agricultural exports with world-class logistics
+          and uncompromising quality. Trusted by businesses across 10+ countries.
         </motion.p>
 
         <motion.div
@@ -86,7 +87,7 @@ const HeroSection = () => {
             href="#contact"
             className="border border-primary/40 text-foreground px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/10 transition-all duration-300 hover:scale-105"
           >
-            Request Global Quote
+            Get Global Quote
           </a>
         </motion.div>
       </div>
