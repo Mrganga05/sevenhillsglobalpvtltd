@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Products", href: "#products" },
   { label: "Why Us", href: "#why-us" },
   { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -46,31 +45,28 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-14 sm:h-20">
           <button onClick={() => handleNav("#home")} className="flex items-center gap-2 sm:gap-3">
-            <img src={logo} alt="Seven Hills Global" className="h-10 sm:h-14 w-auto" />
-            <span className="text-lg sm:text-xl font-serif font-bold gold-gradient-text hidden sm:inline">
+            <img src={logo} alt="Seven Hills Global" className="h-9 sm:h-14 w-auto" />
+            <span className="text-base sm:text-xl font-serif font-bold gold-gradient-text hidden sm:inline">
               Seven Hills Global
             </span>
           </button>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNav(link.href)}
-                className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                className="text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 {link.label}
               </button>
             ))}
           </nav>
 
-          {/* CTA + Contact */}
           <div className="hidden lg:flex items-center gap-6">
-            <a href="tel:+918500336668" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a href="tel:+918500336668" className="flex items-center gap-2 text-sm text-primary/60 hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
               <span>+91 85003 36668</span>
             </a>
@@ -82,17 +78,15 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden text-foreground p-2"
+            className="lg:hidden text-primary p-2"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -101,12 +95,12 @@ const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/50"
           >
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNav(link.href)}
-                  className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors py-2 text-left"
+                  className="text-base font-medium text-primary/80 hover:text-primary transition-colors py-2 text-left"
                 >
                   {link.label}
                 </button>
