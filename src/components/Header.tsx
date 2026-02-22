@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -15,12 +16,23 @@ const navLinks = [
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleNav = (href: string) => {
+    setMobileOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/" + href);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <motion.header
@@ -34,25 +46,25 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-3">
-            <img src={logo} alt="Seven Hills Global" className="h-14 w-auto" />
-            <span className="text-xl font-serif font-bold gold-gradient-text hidden sm:inline">
+          <button onClick={() => handleNav("#home")} className="flex items-center gap-2 sm:gap-3">
+            <img src={logo} alt="Seven Hills Global" className="h-10 sm:h-14 w-auto" />
+            <span className="text-lg sm:text-xl font-serif font-bold gold-gradient-text hidden sm:inline">
               Seven Hills Global
             </span>
-          </a>
+          </button>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.href}
-                href={link.href}
+                onClick={() => handleNav(link.href)}
                 className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -62,12 +74,12 @@ const Header = () => {
               <Phone className="w-4 h-4" />
               <span>+91 85003 36668</span>
             </a>
-            <a
-              href="#contact"
+            <button
+              onClick={() => handleNav("#contact")}
               className="gold-gradient-bg text-primary-foreground px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
             >
               Get Quote
-            </a>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -91,22 +103,20 @@ const Header = () => {
           >
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors py-2"
+                  onClick={() => handleNav(link.href)}
+                  className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors py-2 text-left"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
+              <button
+                onClick={() => handleNav("#contact")}
                 className="gold-gradient-bg text-primary-foreground px-6 py-3 rounded-full text-center font-semibold mt-2"
               >
                 Get Quote
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
