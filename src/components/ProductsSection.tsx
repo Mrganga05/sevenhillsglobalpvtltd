@@ -46,51 +46,49 @@ const ProductCard = ({ product, index }: { product: typeof products[0]; index: n
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.04 }}
-      className="group product-card-hover shine-sweep glass-card overflow-hidden rounded-2xl"
+      transition={{ duration: 0.4, delay: index * 0.03 }}
+      className="group product-card-hover shine-sweep glass-card overflow-hidden rounded-xl"
     >
-      <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent" />
 
-        {/* Export grade badge */}
-        <div className="absolute top-3 right-3">
-          <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-sans font-semibold tracking-wide uppercase gold-gradient-bg text-primary-foreground px-2.5 py-1 rounded-full">
-            <Award className="w-3 h-3" />
+        <div className="absolute top-2 right-2">
+          <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-sans font-semibold tracking-wide uppercase gold-gradient-bg text-primary-foreground px-2 py-0.5 rounded-full">
+            <Award className="w-2.5 h-2.5" />
             {product.grade}
           </span>
         </div>
 
-        {/* Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-          <h3 className="text-base sm:text-lg font-serif font-semibold text-foreground mb-1">
+        <div className="absolute bottom-0 left-0 right-0 p-3">
+          <h3 className="text-sm sm:text-base font-serif font-semibold text-primary mb-0.5">
             {product.name}
           </h3>
-          <p className="text-xs sm:text-sm text-foreground/50 font-sans line-clamp-2 mb-3 leading-relaxed">
+          <p className="text-[10px] sm:text-xs text-primary/50 font-sans line-clamp-2 mb-2 leading-relaxed">
             {product.desc}
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => navigate(`/product/${product.slug}`)}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 border border-primary/40 text-foreground text-xs sm:text-sm font-semibold px-3 py-2 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary/10"
+              className="flex-1 inline-flex items-center justify-center gap-1 border border-primary/40 text-primary text-[10px] sm:text-xs font-semibold px-2 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary/10"
             >
-              <Eye className="w-3.5 h-3.5" /> Details
+              <Eye className="w-3 h-3" /> Details
             </button>
             <a
               href={`https://wa.me/918500336668?text=${whatsappMsg}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 gold-gradient-bg text-primary-foreground text-xs sm:text-sm font-semibold px-3 py-2 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75"
+              className="inline-flex items-center justify-center gap-1 gold-gradient-bg text-primary-foreground text-[10px] sm:text-xs font-semibold px-2 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75"
             >
-              <MessageCircle className="w-3.5 h-3.5" /> Inquire
+              <MessageCircle className="w-3 h-3" /> Inquire
             </a>
           </div>
         </div>
@@ -101,26 +99,26 @@ const ProductCard = ({ product, index }: { product: typeof products[0]; index: n
 
 const ProductsSection = () => {
   return (
-    <section id="products" className="py-16 sm:py-24 section-gradient">
-      <div className="container mx-auto px-4">
+    <section id="products" className="py-12 sm:py-20 section-gradient">
+      <div className="container mx-auto px-3 sm:px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-16"
+          className="text-center mb-8 sm:mb-14"
         >
-          <span className="text-sm font-sans font-semibold tracking-[0.2em] uppercase text-primary/70 mb-4 block">
+          <span className="text-xs sm:text-sm font-sans font-semibold tracking-[0.2em] uppercase text-primary/70 mb-3 block">
             Our Premium Products
           </span>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold mb-3">
             Export-Grade <span className="gold-gradient-text">Agricultural Products</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto font-sans">
+          <p className="text-primary/50 max-w-xl mx-auto font-sans text-sm">
             Sourced directly from India's finest farms, processed to meet the highest international quality standards.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5">
           {products.map((product, i) => (
             <ProductCard key={product.name} product={product} index={i} />
           ))}
