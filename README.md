@@ -30,7 +30,7 @@ git clone <YOUR_GIT_URL>
 cd <YOUR_PROJECT_NAME>
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm install
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
@@ -50,6 +50,22 @@ npm run dev
 - Click on "New codespace" to launch a new Codespace environment.
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
+## Environment Setup
+
+Create a file named `.env` in the root directory, based on `.env.example`:
+```sh
+VITE_SUPABASE_URL=your_project_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
+Ensure no real keys are committed to version control.
+
+## Build for Production
+
+To create a production-ready build:
+```sh
+npm run build
+```
+
 ## What technologies are used for this project?
 
 This project is built with:
@@ -62,7 +78,11 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Vercel / Netlify / Render
+1. Connect your GitHub repository to your preferred hosting provider.
+2. Set the `Build Command` to `npm run build` and the `Output Directory` to `dist`.
+3. Add the environment variables from your `.env.example` file (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`) to your project's Environment Variables settings.
+4. Deploy the application!
 
 ## Can I connect a custom domain to my Lovable project?
 

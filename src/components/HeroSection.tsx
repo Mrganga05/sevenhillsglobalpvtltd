@@ -1,93 +1,285 @@
-import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight, Leaf, Globe, ShieldCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  const floatVariants = {
+    animate: {
+      y: [0, -20, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <section id="home" className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Seven Hills Global agricultural products showcase"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
-        <div className="absolute inset-0" style={{ boxShadow: 'inset 0 0 150px 60px hsla(150, 40%, 5%, 0.7)' }} />
-      </div>
-
-      {[...Array(6)].map((_, i) => (
+    <section id="home" className="w-full relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-background">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Slow zoom background image */}
         <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
-          style={{ top: `${20 + i * 12}%`, left: `${10 + i * 15}%` }}
-          animate={{ y: [-15, 15, -15], opacity: [0.15, 0.5, 0.15] }}
-          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-3 sm:mb-6"
+          className="w-full h-full"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 10, ease: "easeOut" }}
         >
-          <span className="inline-block text-[10px] sm:text-sm font-sans font-semibold tracking-[0.15em] sm:tracking-[0.3em] uppercase text-primary/80 border border-primary/30 rounded-full px-3 sm:px-6 py-1 sm:py-2">
-            Premium Agricultural Exports
-          </span>
+          <img
+            src={heroBg}
+            alt="Seven Hills Global agricultural products showcase"
+            className="w-full h-full object-cover object-center"
+          />
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold leading-tight mb-3 sm:mb-6"
-        >
-          <span className="text-primary">From Nature's Fields</span>
-          <br />
-          <span className="gold-gradient-text">to Global Markets</span>
-        </motion.h1>
+        {/* Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/70 to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/50 to-transparent" />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-xs sm:text-lg md:text-xl text-primary/50 max-w-2xl mx-auto mb-6 sm:mb-10 font-sans px-2"
-        >
-          Premium Indian agricultural exports with world-class logistics
-          and uncompromising quality. Trusted by businesses across 10+ countries.
-        </motion.p>
+        {/* Animated Gold Particles Flowing Up - Optimized count and hardware acceleration */}
+        {Array.from({ length: 50 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute bg-primary/70 rounded-full pointer-events-none shadow-[0_0_10px_var(--primary)] ${i > 25 ? 'hidden sm:block' : ''}`}
+            style={{
+              width: Math.random() * 2 + 1 + "px",
+              height: Math.random() * 2 + 1 + "px",
+              top: Math.random() * 100 + "%",
+              left: Math.random() * 100 + "%",
+              willChange: "transform, opacity",
+            }}
+            animate={{
+              y: [0, -Math.random() * 1200 - 600],
+              x: [0, Math.random() * 200 - 100],
+              opacity: [0, Math.random() * 0.7 + 0.3, 0],
+              scale: [0.8, 1.5, 0.8]
+            }}
+            transition={{
+              duration: Math.random() * 25 + 15,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 10,
+            }}
+          />
+        ))}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4"
-        >
-          <a
-            href="#products"
-            className="w-full sm:w-auto gold-gradient-bg text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 animate-pulse-gold"
+        {/* Floating Leaves */}
+        {Array.from({ length: 6 }).map((_, i) => (
+          <motion.div
+            key={`leaf-${i}`}
+            className="absolute text-primary/20 pointer-events-none hidden sm:block"
+            style={{
+              top: Math.random() * 100 + "%",
+              left: Math.random() * 100 + "%",
+              willChange: "transform",
+            }}
+            animate={{
+              y: [0, -Math.random() * 100 - 50, 0],
+              x: [0, Math.random() * 100 - 50, 0],
+              rotate: [0, Math.random() * 360],
+            }}
+            transition={{
+              duration: Math.random() * 20 + 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           >
-            Explore Products
-          </a>
-          <a
-            href="#contact"
-            className="w-full sm:w-auto border border-primary/40 text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-semibold hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-          >
-            Get Global Quote
-          </a>
-        </motion.div>
+            <Leaf size={Math.random() * 40 + 20} className="drop-shadow-lg" />
+          </motion.div>
+        ))}
       </div>
 
-      <motion.div
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-primary/50 rounded-full" />
-        </div>
-      </motion.div>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 flex flex-col items-center justify-center h-full text-center">
+        <motion.div
+          className="max-w-4xl flex flex-col items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* Elegant Premium Badge */}
+          <motion.div variants={itemVariants} className="mb-8 flex items-center justify-center w-full">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-primary"></div>
+              <span className="text-[10px] sm:text-xs md:text-sm font-light uppercase tracking-[0.4em] text-primary drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">
+                TRUSTED GLOBAL EXPORT PARTNER
+              </span>
+              <div className="h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-primary"></div>
+            </div>
+          </motion.div>
+
+          {/* Main Typography */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-[3rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center text-balance tracking-normal"
+          >
+            {/* Animated SEVEN HILLS */}
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] uppercase tracking-normal flex flex-wrap justify-center overflow-hidden py-1 sm:py-2" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
+              {"SEVEN HILLS".split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.2, 0.65, 0.3, 0.9],
+                    delay: 0.5 + index * 0.05,
+                  }}
+                  className={letter === " " ? "w-[0.3em]" : "inline-block"}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </span>
+            <span className="mt-1 sm:mt-2 lg:mt-3 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase">
+              {/* Animated GLOBAL */}
+              <span className="flex overflow-hidden text-primary drop-shadow-[0_0_8px_var(--primary)]">
+                {"GLOBAL".split("").map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.2, 0.65, 0.3, 0.9],
+                      delay: 1.2 + index * 0.08, // Starts after SEVEN HILLS
+                    }}
+                    className="inline-block"
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </span>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.8, type: "spring", stiffness: 100 }}
+                className="text-[10px] sm:text-xs md:text-sm mt-3 lg:mt-0 lg:-translate-y-6 lg:ml-4 tracking-[0.2em] font-black px-3 py-1 sm:px-4 sm:py-1.5 lg:px-5 lg:py-2 rounded-full text-primary-foreground bg-primary sm:bg-gradient-to-br sm:from-primary/95 sm:to-primary/80 shadow-[0_0_10px_-5px_var(--primary)] shadow-primary/40 inline-flex items-center justify-center w-fit border border-primary/20 relative overflow-hidden group transition-all transform hover:scale-105"
+              >
+                {/* Shine effect only on sm screens and above */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] animate-[shimmer_2s_infinite]" />
+                <span className="relative z-10 uppercase">PVT LTD</span>
+              </motion.span>
+            </span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.div
+            variants={itemVariants}
+            className="text-[14px] sm:text-lg md:text-xl text-white/90 max-w-3xl leading-relaxed sm:leading-relaxed mb-10 sm:mb-12 text-balance font-light relative text-center mx-auto px-2 sm:px-0"
+          >
+            <span className="block font-medium text-white/90 text-sm sm:text-xl md:text-2xl drop-shadow-sm">Premium Indian Agricultural Exports to 10+ Countries Worldwide.</span>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full sm:w-auto mt-2">
+            <Link
+              to="/products"
+              className="w-full sm:w-auto relative group inline-flex"
+            >
+              {/* Dynamic glowing aura */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/80 to-primary/40 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 group-hover:animate-pulse"></div>
+
+              <div className="relative w-full flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-primary/95 to-primary/80 hover:from-primary hover:to-primary/90 rounded-full text-primary-foreground font-bold text-sm sm:text-base border border-white/20 overflow-hidden transform transition-all duration-300 group-hover:scale-[1.05] group-hover:-translate-y-1 shadow-[0_0_30px_-5px_var(--primary)] shadow-primary/50">
+                {/* Advanced shine sweep effect */}
+                <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[30deg] transition-all ease-in-out duration-1000 z-0 group-hover:translate-x-[150%]" />
+
+                {/* Live pulsing dot */}
+                <span className="relative flex h-2 w-2 z-10 mr-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-90"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+
+                <span className="relative z-10 tracking-widest uppercase text-[13px] sm:text-[15px] drop-shadow-sm font-black">View Products</span>
+
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10"
+                >
+                  <ArrowRight className="w-5 h-5 ml-1 stroke-[3px]" />
+                </motion.div>
+
+                {/* Subtle border wrap */}
+                <div className="absolute inset-0 rounded-full border border-transparent group-hover:border-white/40 transition-colors duration-300 z-10"></div>
+              </div>
+            </Link>
+
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto relative group inline-flex"
+            >
+              {/* Dynamic glowing aura for secondary button */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-white/5 rounded-full blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+              <div className="relative w-full overflow-hidden flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-white font-bold text-xs sm:text-sm hover:bg-white/15 hover:border-white/50 hover:text-white transition-all duration-300 shadow-lg transform group-hover:scale-[1.05] group-hover:-translate-y-1">
+                {/* Shine effect across the entire button on hover */}
+                <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[30deg] transition-all ease-in-out duration-1000 z-0 group-hover:translate-x-[150%]" />
+                <span className="relative z-10 tracking-widest uppercase drop-shadow-sm text-[12px] sm:text-[14px] font-bold">Get in Touch</span>
+              </div>
+            </Link>
+          </motion.div>
+
+          {/* Trust Indicators */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 w-full"
+          >
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:justify-center sm:gap-12 lg:gap-16">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
+                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
+                  <Globe className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">10<span className="text-primary">+</span></div>
+                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Countries</div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
+                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
+                  <Leaf className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">50<span className="text-primary">+</span></div>
+                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Products</div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
+                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">100<span className="text-primary">%</span></div>
+                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Assured</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

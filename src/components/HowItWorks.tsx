@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Sprout, FlaskConical, Package, FileCheck, Plane } from "lucide-react";
 
 const steps = [
@@ -11,60 +10,80 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="process" className="py-12 sm:py-20 section-gradient">
-      <div className="container mx-auto px-3 sm:px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-14"
-        >
-          <span className="text-xs sm:text-sm font-sans font-semibold tracking-[0.2em] uppercase text-primary/70 mb-3 block">
+    <section id="process" className="w-full py-14 sm:py-20 lg:py-24 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 sm:mb-16">
+          <span className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-primary mb-3 block">
             Our Export Process
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold mb-3">
-            From Farm <span className="gold-gradient-text">to Your Door</span>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3">
+            From Farm <span className="text-primary">to Your Door</span>
           </h2>
-          <p className="text-primary/50 max-w-xl mx-auto font-sans text-sm">
+          <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base leading-relaxed px-2">
             A transparent, quality-first supply chain ensuring the finest produce reaches global markets.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent -translate-x-1/2" />
+        {/* Mobile: vertical steps with numbered left badge */}
+        <div className="flex flex-col gap-4 md:hidden">
+          {steps.map((step, i) => (
+            <div
+              key={step.number}
+              className="flex items-start gap-4"
+            >
+              {/* Number badge + connecting line */}
+              <div className="flex flex-col items-center shrink-0">
+                <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-md">
+                  <span className="text-xs font-bold text-primary-foreground">{step.number}</span>
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="w-px flex-1 min-h-[24px] bg-primary/20 mt-1" />
+                )}
+              </div>
+              <div className="bg-card p-4 flex-1 rounded-2xl border border-border shadow-sm mb-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <step.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-foreground">{step.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
-          <div className="space-y-6 md:space-y-0">
+        {/* Desktop: alternating left/right with center timeline */}
+        <div className="relative max-w-4xl mx-auto hidden md:block">
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-primary/20 -translate-x-1/2" />
+
+          <div className="space-y-12">
             {steps.map((step, i) => {
               const isLeft = i % 2 === 0;
               return (
-                <motion.div
+                <div
                   key={step.number}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative md:flex items-center md:mb-12 ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+                  className={`relative flex items-center ${isLeft ? "flex-row" : "flex-row-reverse"}`}
                 >
-                  <div className={`md:w-[calc(50%-2rem)] ${isLeft ? "md:pr-0" : "md:pl-0"}`}>
-                    <div className="glass-card p-4 sm:p-5 group hover:gold-glow transition-all duration-500">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <step.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <div className={`w-[calc(50%-2.5rem)] ${isLeft ? "pr-0 text-right" : "pl-0 text-left"}`}>
+                    <div className="bg-card rounded-2xl border border-border shadow-sm p-5 lg:p-6 inline-block w-full">
+                      <div className={`flex items-center gap-3 mb-2 ${isLeft ? "flex-row-reverse" : "flex-row"}`}>
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                          <step.icon className="w-5 h-5 text-primary" />
                         </div>
-                        <h3 className="text-sm sm:text-base font-serif font-semibold text-primary">{step.title}</h3>
+                        <h3 className="text-base lg:text-lg font-semibold text-foreground">{step.title}</h3>
                       </div>
-                      <p className="text-primary/40 font-sans text-[10px] sm:text-xs leading-relaxed">{step.desc}</p>
+                      <p className={`text-muted-foreground text-xs sm:text-sm leading-relaxed ${isLeft ? "text-right" : "text-left"}`}>{step.desc}</p>
                     </div>
                   </div>
 
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full gold-gradient-bg items-center justify-center z-10 shadow-lg">
-                    <span className="text-xs font-bold text-primary-foreground">{step.number}</span>
+                  {/* Center dot */}
+                  <div className="flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-primary items-center justify-center z-10 shadow-sm shrink-0">
+                    <span className="text-sm font-bold text-primary-foreground">{step.number}</span>
                   </div>
 
-                  <div className="hidden md:block md:w-[calc(50%-2rem)]" />
-                </motion.div>
+                  <div className="w-[calc(50%-2.5rem)]" />
+                </div>
               );
             })}
           </div>

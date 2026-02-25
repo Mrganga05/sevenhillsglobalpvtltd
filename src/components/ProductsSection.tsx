@@ -1,127 +1,110 @@
+import { PackageOpen, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MessageCircle, Award, Eye } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-
-import turmericImg from "@/assets/products/turmeric.jpg";
-import cashewImg from "@/assets/products/cashew.jpg";
-import onionsImg from "@/assets/products/onions.jpg";
-import onionPowderImg from "@/assets/products/onion-powder.jpg";
-import milletsImg from "@/assets/products/millets.jpg";
-import jaggeryImg from "@/assets/products/jaggery.jpg";
-import jaggeryPowderImg from "@/assets/products/jaggery-powder.jpg";
-import honeyImg from "@/assets/products/honey.jpg";
-import moringaImg from "@/assets/products/moringa.jpg";
-import bananaPowderImg from "@/assets/products/banana-powder.jpg";
-import groundnutImg from "@/assets/products/groundnut.jpg";
-import sesameImg from "@/assets/products/sesame.jpg";
-import gingerImg from "@/assets/products/ginger.jpg";
-import coconutImg from "@/assets/products/coconut.jpg";
-import herbalImg from "@/assets/products/herbal.jpg";
-import spicesImg from "@/assets/products/spices.jpg";
-import potatoImg from "@/assets/products/potato.jpg";
-
-export const products = [
-  { name: "Turmeric", slug: "turmeric", image: turmericImg, desc: "Premium Erode & Nizamabad turmeric with high curcumin content, ideal for food, pharma & cosmetics.", origin: "Andhra Pradesh & Tamil Nadu", moq: "1 MT", grade: "Export A" },
-  { name: "Cashew Nuts", slug: "cashew-nuts", image: cashewImg, desc: "Hand-sorted W180, W240, W320 grade cashew kernels with consistent quality.", origin: "Andhra Pradesh & Kerala", moq: "500 Kg", grade: "Export Premium" },
-  { name: "Onions", slug: "onions", image: onionsImg, desc: "Fresh red, white & pink onions sourced from Nashik and AP regions.", origin: "Maharashtra & AP", moq: "5 MT", grade: "Export A" },
-  { name: "Onion Powder", slug: "onion-powder", image: onionPowderImg, desc: "Dehydrated onion powder with rich aroma, perfect for seasoning blends.", origin: "Maharashtra", moq: "500 Kg", grade: "Export A" },
-  { name: "Millets", slug: "millets", image: milletsImg, desc: "Organic foxtail, finger, pearl & barnyard millets — superfood grains.", origin: "Andhra Pradesh", moq: "1 MT", grade: "Organic" },
-  { name: "Jaggery", slug: "jaggery", image: jaggeryImg, desc: "Traditional sugarcane jaggery blocks, chemical-free natural sweetener.", origin: "Andhra Pradesh", moq: "2 MT", grade: "Export A" },
-  { name: "Jaggery Powder", slug: "jaggery-powder", image: jaggeryPowderImg, desc: "Fine-ground jaggery powder for beverages, bakery & health foods.", origin: "Andhra Pradesh", moq: "1 MT", grade: "Export A" },
-  { name: "Honey", slug: "honey", image: honeyImg, desc: "Pure multiflora & acacia honey, NMR tested, raw & unprocessed.", origin: "Andhra Pradesh", moq: "500 Kg", grade: "NMR Tested" },
-  { name: "Moringa Powder", slug: "moringa-powder", image: moringaImg, desc: "Shade-dried moringa oleifera leaf powder, rich in nutrients.", origin: "Tamil Nadu & AP", moq: "500 Kg", grade: "Organic" },
-  { name: "Banana Powder", slug: "banana-powder", image: bananaPowderImg, desc: "Spray-dried banana powder ideal for baby food and health supplements.", origin: "Andhra Pradesh", moq: "500 Kg", grade: "Export A" },
-  { name: "Groundnut", slug: "groundnut", image: groundnutImg, desc: "Bold & Java type groundnuts, hand-picked and sorted for export.", origin: "Gujarat & AP", moq: "2 MT", grade: "Export Premium" },
-  { name: "Sesame Seeds", slug: "sesame-seeds", image: sesameImg, desc: "Natural & hulled white sesame seeds with 99.95% purity.", origin: "Rajasthan & Gujarat", moq: "1 MT", grade: "Export Premium" },
-  { name: "Ginger", slug: "ginger", image: gingerImg, desc: "Fresh & dried ginger with high gingerol content for global markets.", origin: "Kerala & AP", moq: "1 MT", grade: "Export A" },
-  { name: "Coconut Products", slug: "coconut-products", image: coconutImg, desc: "Desiccated coconut, coconut oil, virgin coconut oil & coconut powder.", origin: "Kerala & Tamil Nadu", moq: "1 MT", grade: "Export A" },
-  { name: "Herbal Powders", slug: "herbal-powders", image: herbalImg, desc: "Ashwagandha, Brahmi, Tulsi & more — certified herbal powders.", origin: "Pan India", moq: "500 Kg", grade: "Organic" },
-  { name: "Spices", slug: "spices", image: spicesImg, desc: "Red chilli, black pepper, coriander, cumin — premium Indian spices.", origin: "Andhra Pradesh & Kerala", moq: "1 MT", grade: "Export A" },
-  { name: "Potato", slug: "potato", image: potatoImg, desc: "Fresh table potatoes and processing-grade potatoes for chips industry.", origin: "Uttar Pradesh & Gujarat", moq: "5 MT", grade: "Export A" },
-];
-
-const ProductCard = ({ product, index }: { product: typeof products[0]; index: number }) => {
-  const navigate = useNavigate();
-  const whatsappMsg = encodeURIComponent(`Hello Seven Hills Global, I'm interested in ${product.name}. Please share details.`);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
-      className="group product-card-hover shine-sweep glass-card overflow-hidden rounded-xl"
-    >
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent" />
-
-        <div className="absolute top-2 right-2">
-          <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-sans font-semibold tracking-wide uppercase gold-gradient-bg text-primary-foreground px-2 py-0.5 rounded-full">
-            <Award className="w-2.5 h-2.5" />
-            {product.grade}
-          </span>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 p-3">
-          <h3 className="text-sm sm:text-base font-serif font-semibold text-primary mb-0.5">
-            {product.name}
-          </h3>
-          <p className="text-[10px] sm:text-xs text-primary/50 font-sans line-clamp-2 mb-2 leading-relaxed">
-            {product.desc}
-          </p>
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={() => navigate(`/product/${product.slug}`)}
-              className="flex-1 inline-flex items-center justify-center gap-1 border border-primary/40 text-primary text-[10px] sm:text-xs font-semibold px-2 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary/10"
-            >
-              <Eye className="w-3 h-3" /> Details
-            </button>
-            <a
-              href={`https://wa.me/918500336668?text=${whatsappMsg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1 gold-gradient-bg text-primary-foreground text-[10px] sm:text-xs font-semibold px-2 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75"
-            >
-              <MessageCircle className="w-3 h-3" /> Inquire
-            </a>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+import { useProducts } from "../hooks/useDatabase";
+import { DEFAULT_PRODUCT_IMAGE } from "../constants/defaultImage";
+import { getFallbackImage } from "../utils/productImages";
 
 const ProductsSection = () => {
+  // Fetch featured products dynamically from the database
+  const { data: displayProducts, isLoading, isError } = useProducts(undefined, true, 2);
+
   return (
-    <section id="products" className="py-12 sm:py-20 section-gradient">
-      <div className="container mx-auto px-3 sm:px-4">
+    <section id="products" className="w-full py-14 sm:py-20 lg:py-24 relative overflow-hidden bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-14"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10 sm:mb-14 lg:mb-16"
         >
-          <span className="text-xs sm:text-sm font-sans font-semibold tracking-[0.2em] uppercase text-primary/70 mb-3 block">
-            Our Premium Products
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold mb-3">
-            Export-Grade <span className="gold-gradient-text">Agricultural Products</span>
+          <div className="inline-flex items-center justify-center gap-2 mb-4">
+            <div className="h-px w-8 bg-primary/50"></div>
+            <span className="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-primary">
+              Featured Selection
+            </span>
+            <div className="h-px w-8 bg-primary/50"></div>
+          </div>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
+            Premium <span className="text-primary">Agricultural Exports</span>
           </h2>
-          <p className="text-primary/50 max-w-xl mx-auto font-sans text-sm">
-            Sourced directly from India's finest farms, processed to meet the highest international quality standards.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed px-2">
+            Sourced directly from India's finest farms, meticulously processed to meet and exceed strict international quality standards.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5">
-          {products.map((product, i) => (
-            <ProductCard key={product.name} product={product} index={i} />
-          ))}
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[1, 2].map((i) => (
+              <div key={i} className="animate-pulse h-[400px] rounded-2xl bg-muted border border-border"></div>
+            ))}
+          </div>
+        ) : isError || !displayProducts || displayProducts.length === 0 ? (
+          <div className="text-center py-12 p-6 bg-card border border-border max-w-2xl mx-auto rounded-xl shadow-sm">
+            <PackageOpen className="w-12 h-12 text-muted-foreground opacity-50 mx-auto mb-4" />
+            <p className="text-muted-foreground">No featured products found. Please check back later or add products via the admin dashboard.</p>
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto"
+          >
+            {displayProducts.map((product, i) => {
+              const fallback = getFallbackImage(product.name);
+              const image = product.image_url || fallback || DEFAULT_PRODUCT_IMAGE;
+
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: i * 0.2 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  key={product.id}
+                  className="group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-colors duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] cursor-pointer"
+                >
+                  <Link to={`/products/${product.slug}`} className="absolute inset-0 z-10">
+                    <span className="sr-only">View {product.name}</span>
+                  </Link>
+                  <div className="relative w-full h-52 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-muted">
+                    <img
+                      src={image}
+                      alt={product.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  <div className="relative p-5 sm:p-7 lg:p-8 flex flex-col flex-1 bg-card/60 backdrop-blur-xl border-t border-white/5 z-20 pointer-events-none">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-3 mb-5 sm:mb-6 flex-1 leading-relaxed">
+                      {product.short_description}
+                    </p>
+                    <div
+                      className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-xs sm:text-sm w-fit"
+                    >
+                      View Details <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
+
+        <div className="text-center mt-12 sm:mt-16 lg:mt-20">
+          <Link
+            to="/products"
+            className="inline-flex items-center justify-center gap-2 border border-primary bg-primary text-primary-foreground hover:bg-primary/90 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold transition-all duration-300 text-sm sm:text-base"
+          >
+            Explore Full Product Range
+          </Link>
         </div>
       </div>
     </section>
