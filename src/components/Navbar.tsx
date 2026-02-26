@@ -68,96 +68,98 @@ export default function Navbar() {
     const mobLinkNormal = "text-white/80 hover:bg-primary/5 hover:text-primary";
 
     return (
-        <header
-            className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled
-                ? "top-2 sm:top-6 mx-4 sm:mx-8 lg:mx-auto max-w-6xl bg-background/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5),inset_0_0_20px_rgba(var(--primary),0.2)] border border-white/20 rounded-full"
-                : "top-0 mx-0 bg-transparent rounded-none border-b border-white/5"
-                }`}
-        >
-            <nav className={`mx-auto w-full transition-all duration-500 ${isScrolled ? "px-5 sm:px-8" : "max-w-7xl px-4 sm:px-6 lg:px-8"}`}>
-                <div className={`flex justify-between items-center transition-all duration-500 ${isScrolled ? "h-14 sm:h-16" : "h-16 sm:h-24"}`}>
-                    <NavLink to="/" className="flex items-center gap-3 shrink-0" onClick={() => setIsOpen(false)}>
-                        <img src={logo} alt="Seven Hills Logo" className="h-10 w-auto sm:h-12" />
-                        <div className="flex flex-col">
-                            <span className="text-primary font-bold text-[13px] sm:text-[15px] xl:text-[17px] tracking-tight uppercase whitespace-nowrap">
-                                SEVEN HILLS GLOBAL
-                            </span>
-                            <span className="text-primary/80 text-[10px] tracking-widest font-bold mt-0.5">
-                                PVT LTD
-                            </span>
+        <>
+            <header
+                className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out pointer-events-auto ${isScrolled
+                    ? "top-2 sm:top-6 mx-4 sm:mx-8 lg:mx-auto max-w-6xl bg-background/95 backdrop-blur-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5),inset_0_0_20px_rgba(var(--primary),0.2)] border border-white/20 rounded-full"
+                    : "top-0 mx-0 bg-background/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-none border-b border-white/5"
+                    }`}
+            >
+                <nav className={`mx-auto w-full transition-all duration-500 ${isScrolled ? "px-5 sm:px-8" : "max-w-7xl px-4 sm:px-6 lg:px-8"}`}>
+                    <div className={`flex justify-between items-center transition-all duration-500 ${isScrolled ? "h-14 sm:h-16" : "h-16 sm:h-24"}`}>
+                        <NavLink to="/" className="flex items-center gap-3 shrink-0" onClick={() => setIsOpen(false)}>
+                            <img src={logo} alt="Seven Hills Logo" className="h-10 w-auto sm:h-12" loading="eager" decoding="async" />
+                            <div className="flex flex-col justify-center">
+                                <span className="text-primary font-black text-[12px] sm:text-[14px] xl:text-[16px] tracking-tight uppercase whitespace-nowrap drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">
+                                    SEVEN HILLS GLOBAL
+                                </span>
+                                <span className="text-primary/70 text-[8px] sm:text-[9px] tracking-[0.2em] font-bold mt-[1px] uppercase">
+                                    PVT LTD
+                                </span>
+                            </div>
+                        </NavLink>
+
+                        <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+                            <NavLink to="/" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Home</NavLink>
+                            <NavLink to="/about" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>About</NavLink>
+                            <NavLink to="/products" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Products</NavLink>
+                            <NavLink to="/export-process" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Export</NavLink>
+                            <NavLink to="/certifications" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Certifications</NavLink>
+                            <NavLink to="/global-presence" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Global</NavLink>
+                            <NavLink to="/contact" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Contact</NavLink>
+
+                            <div className="ml-1 xl:ml-3 flex items-center gap-1 xl:gap-3 border-l border-white/10 pl-2 xl:pl-4">
+                                <button
+                                    onClick={() => setIsCartOpen(true)}
+                                    className="flex items-center gap-2 px-2 xl:px-4 py-1.5 xl:py-2 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/30 rounded-xl transition-all font-bold text-[12px] xl:text-[13px]"
+                                >
+                                    <ShoppingCart className="w-4 h-4" />
+                                    <span className="hidden xl:inline">Quote Cart</span>
+                                    {totalItems > 0 && (
+                                        <span className="bg-primary text-primary-foreground px-1.5 py-0.5 rounded-md text-[10px] xl:text-[11px]">
+                                            {totalItems}
+                                        </span>
+                                    )}
+                                </button>
+
+                                {isAdmin ? (
+                                    <div className="flex items-center gap-1 xl:gap-2 ml-1">
+                                        <NavLink
+                                            to="/admin/dashboard"
+                                            className="flex items-center gap-1.5 px-2 xl:px-4 py-1.5 xl:py-2 bg-primary text-primary-foreground rounded-xl font-bold text-[12px] xl:text-[13px] hover:opacity-90 transition-all"
+                                        >
+                                            <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Admin</span>
+                                        </NavLink>
+                                        <button
+                                            onClick={logout}
+                                            className="p-1.5 xl:p-2 border border-white/10 rounded-xl hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 transition-all"
+                                        >
+                                            <LogOut className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <NavLink
+                                        to="/admin/login"
+                                        className="flex items-center gap-1.5 px-2 xl:px-4 py-1.5 xl:py-2 border border-primary/30 rounded-xl hover:bg-primary/10 text-primary transition-all font-bold text-[12px] xl:text-[13px]"
+                                    >
+                                        <User className="w-4 h-4" /> <span className="hidden xl:inline">Partner Login</span>
+                                    </NavLink>
+                                )}
+                            </div>
                         </div>
-                    </NavLink>
 
-                    <div className="hidden lg:flex items-center gap-1 xl:gap-4">
-                        <NavLink to="/" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Home</NavLink>
-                        <NavLink to="/about" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>About</NavLink>
-                        <NavLink to="/products" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Products</NavLink>
-                        <NavLink to="/export-process" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Export</NavLink>
-                        <NavLink to="/certifications" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Certifications</NavLink>
-                        <NavLink to="/global-presence" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Global</NavLink>
-                        <NavLink to="/contact" className={({ isActive }) => `${deskLinkBase} ${isActive ? deskLinkActive : deskLinkHover}`}>Contact</NavLink>
-
-                        <div className="ml-2 xl:ml-6 flex items-center gap-2 xl:gap-4 border-l border-white/10 pl-2 xl:pl-8">
+                        <div className="flex lg:hidden items-center gap-3">
                             <button
                                 onClick={() => setIsCartOpen(true)}
-                                className="flex items-center gap-2 px-3 xl:px-6 py-2 xl:py-2.5 bg-primary/10 border border-primary/30 text-primary hover:bg-primary/30 rounded-xl transition-all font-bold text-[13px] xl:text-sm"
+                                className="relative p-2 text-white/80 hover:text-primary hover:bg-white/5 rounded-full transition-colors flex items-center justify-center"
                             >
-                                <ShoppingCart className="w-4 h-4" />
-                                <span className="hidden xl:inline">Quote Cart</span>
+                                <ShoppingCart className="w-6 h-6" />
                                 {totalItems > 0 && (
-                                    <span className="bg-primary text-primary-foreground px-1.5 py-0.5 rounded-md text-[10px] xl:text-xs">
+                                    <span className="absolute top-0 right-0 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center animate-bounce">
                                         {totalItems}
                                     </span>
                                 )}
                             </button>
-
-                            {isAdmin ? (
-                                <div className="flex items-center gap-2 ml-1 xl:ml-3">
-                                    <NavLink
-                                        to="/admin/dashboard"
-                                        className="flex items-center gap-2 px-3 xl:px-5 py-2 xl:py-2.5 bg-primary text-primary-foreground rounded-xl font-bold text-[13px] xl:text-sm hover:opacity-90 transition-all"
-                                    >
-                                        <LayoutDashboard className="w-4 h-4" /> Admin
-                                    </NavLink>
-                                    <button
-                                        onClick={logout}
-                                        className="p-2.5 border border-white/10 rounded-xl hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 transition-all"
-                                    >
-                                        <LogOut className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            ) : (
-                                <NavLink
-                                    to="/admin/login"
-                                    className="flex items-center gap-2 px-3 xl:px-6 py-2 xl:py-2.5 border border-primary/30 rounded-xl hover:bg-primary/10 text-primary transition-all font-bold text-[13px] xl:text-sm"
-                                >
-                                    <User className="w-4 h-4" /> Partner Login
-                                </NavLink>
-                            )}
+                            <button
+                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20"
+                                onClick={() => setIsOpen(!isOpen)}
+                            >
+                                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                            </button>
                         </div>
                     </div>
-
-                    <div className="flex lg:hidden items-center gap-3">
-                        <button
-                            onClick={() => setIsCartOpen(true)}
-                            className="relative p-2 text-white/80 hover:text-primary hover:bg-white/5 rounded-full transition-colors flex items-center justify-center"
-                        >
-                            <ShoppingCart className="w-6 h-6" />
-                            {totalItems > 0 && (
-                                <span className="absolute top-0 right-0 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center animate-bounce">
-                                    {totalItems}
-                                </span>
-                            )}
-                        </button>
-                        <button
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20"
-                            onClick={() => setIsOpen(!isOpen)}
-                        >
-                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                        </button>
-                    </div>
-                </div>
-            </nav>
+                </nav>
+            </header>
 
             {/* Mobile Menu */}
             {isOpen && (
@@ -203,6 +205,6 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
-        </header>
+        </>
     );
 }

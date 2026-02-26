@@ -51,18 +51,20 @@ const HeroSection = () => {
             src={heroBg}
             alt="Seven Hills Global agricultural products showcase"
             className="w-full h-full object-cover object-center"
+            loading="eager"
+            decoding="async"
           />
         </motion.div>
 
-        {/* Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/70 to-background/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/50 to-transparent" />
+        {/* Gradients - Reduced opacity by 20-30% */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/50 to-background/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/30 to-transparent" />
 
         {/* Animated Gold Particles Flowing Up - Optimized count and hardware acceleration */}
         {Array.from({ length: 50 }).map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute bg-primary/70 rounded-full pointer-events-none shadow-[0_0_10px_var(--primary)] ${i > 25 ? 'hidden sm:block' : ''}`}
+            className={`absolute bg-primary/70 rounded-full pointer-events-none shadow-[0_0_10px_var(--primary)] ${i > 5 ? 'hidden sm:block' : ''}`}
             style={{
               width: Math.random() * 2 + 1 + "px",
               height: Math.random() * 2 + 1 + "px",
@@ -134,8 +136,8 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-[3rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center text-balance tracking-normal"
           >
-            {/* Animated SEVEN HILLS */}
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] uppercase tracking-normal flex flex-wrap justify-center overflow-hidden py-1 sm:py-2" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
+            {/* Animated SEVEN HILLS - Reduced Glow */}
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/80 drop-shadow-[0_0_6px_rgba(255,255,255,0.15)] uppercase tracking-normal flex flex-wrap justify-center overflow-hidden py-1 sm:py-2" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
               {"SEVEN HILLS".split("").map((letter, index) => (
                 <motion.span
                   key={index}
@@ -153,8 +155,8 @@ const HeroSection = () => {
               ))}
             </span>
             <span className="mt-1 sm:mt-2 lg:mt-3 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase">
-              {/* Animated GLOBAL */}
-              <span className="flex overflow-hidden text-primary drop-shadow-[0_0_8px_var(--primary)]">
+              {/* Animated GLOBAL - Reduced Glow */}
+              <span className="flex overflow-hidden text-primary drop-shadow-[0_0_6px_var(--primary)]">
                 {"GLOBAL".split("").map((letter, index) => (
                   <motion.span
                     key={index}
@@ -171,16 +173,6 @@ const HeroSection = () => {
                   </motion.span>
                 ))}
               </span>
-              <motion.span
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.8, type: "spring", stiffness: 100 }}
-                className="text-[10px] sm:text-xs md:text-sm mt-3 lg:mt-0 lg:-translate-y-6 lg:ml-4 tracking-[0.2em] font-black px-3 py-1 sm:px-4 sm:py-1.5 lg:px-5 lg:py-2 rounded-full text-primary-foreground bg-primary sm:bg-gradient-to-br sm:from-primary/95 sm:to-primary/80 shadow-[0_0_10px_-5px_var(--primary)] shadow-primary/40 inline-flex items-center justify-center w-fit border border-primary/20 relative overflow-hidden group transition-all transform hover:scale-105"
-              >
-                {/* Shine effect only on sm screens and above */}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] animate-[shimmer_2s_infinite]" />
-                <span className="relative z-10 uppercase">PVT LTD</span>
-              </motion.span>
             </span>
           </motion.h1>
 
@@ -189,7 +181,8 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-[14px] sm:text-lg md:text-xl text-white/90 max-w-3xl leading-relaxed sm:leading-relaxed mb-10 sm:mb-12 text-balance font-light relative text-center mx-auto px-2 sm:px-0"
           >
-            <span className="block font-medium text-white/90 text-sm sm:text-xl md:text-2xl drop-shadow-sm">Premium Indian Agricultural Exports to 10+ Countries Worldwide.</span>
+            <span className="block font-medium text-white/90 text-sm sm:text-xl md:text-2xl drop-shadow-sm mb-2">Premium Indian Agricultural Exports to 10+ Countries Worldwide.</span>
+            <span className="block font-medium text-primary text-sm sm:text-lg md:text-xl drop-shadow-[0_0_3px_var(--primary)]">Delivering Quality. Consistency. Global Standards.</span>
           </motion.div>
 
           {/* CTA Buttons */}
@@ -198,10 +191,10 @@ const HeroSection = () => {
               to="/products"
               className="w-full sm:w-auto relative group inline-flex"
             >
-              {/* Dynamic glowing aura */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/80 to-primary/40 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 group-hover:animate-pulse"></div>
+              {/* Dynamic glowing aura - Reduced Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/80 to-primary/40 rounded-full blur-md opacity-50 group-hover:opacity-80 transition duration-500 group-hover:animate-pulse"></div>
 
-              <div className="relative w-full flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-primary/95 to-primary/80 hover:from-primary hover:to-primary/90 rounded-full text-primary-foreground font-bold text-sm sm:text-base border border-white/20 overflow-hidden transform transition-all duration-300 group-hover:scale-[1.05] group-hover:-translate-y-1 shadow-[0_0_30px_-5px_var(--primary)] shadow-primary/50">
+              <div className="relative w-full flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-primary/95 to-primary/80 hover:from-primary hover:to-primary/90 rounded-full text-primary-foreground font-bold text-sm sm:text-base border border-white/20 overflow-hidden transform transition-all duration-300 group-hover:scale-[1.05] group-hover:-translate-y-1 shadow-[0_0_20px_-5px_var(--primary)] shadow-primary/30">
                 {/* Advanced shine sweep effect */}
                 <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[30deg] transition-all ease-in-out duration-1000 z-0 group-hover:translate-x-[150%]" />
 
@@ -244,38 +237,53 @@ const HeroSection = () => {
           {/* Trust Indicators */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 w-full"
+            className="mt-12 sm:mt-16 pt-8 sm:pt-12 w-full"
           >
-            <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:justify-center sm:gap-12 lg:gap-16">
-              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
-                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
-                  <Globe className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:items-start sm:justify-center sm:gap-16 lg:gap-24">
+
+              <div className="flex flex-col items-center gap-3 sm:gap-4 group p-2 sm:p-0 rounded-xl transition-colors">
+                <div className="p-4 sm:p-5 rounded-full border border-primary bg-primary/5 transition-all shadow-[0_0_15px_-2px_var(--primary)] text-primary group-hover:shadow-[0_0_30px_0px_var(--primary)]">
+                  <Globe className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-[0_0_8px_var(--primary)]" strokeWidth={1.5} />
                 </div>
-                <div className="text-center sm:text-left">
-                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">10<span className="text-primary">+</span></div>
-                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Countries</div>
+                <div className="text-center flex flex-col items-center">
+                  <div className="text-xl sm:text-4xl font-extrabold text-white mb-2 tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">10+</div>
+                  <div className="text-[10px] sm:text-[13px] uppercase tracking-widest text-primary font-bold leading-relaxed drop-shadow-[0_0_8px_var(--primary)]">
+                    Export<br />Destinations
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
-                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
-                  <Leaf className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+              <div className="flex flex-col items-center gap-3 sm:gap-4 group p-2 sm:p-0 rounded-xl transition-colors relative">
+                {/* Thin dividing lines acting as borders between items, visible only on sm+ */}
+                <div className="hidden sm:block absolute -left-8 lg:-left-12 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                <div className="hidden sm:block absolute -right-8 lg:-right-12 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
+                <div className="p-4 sm:p-5 rounded-full border border-primary bg-primary/5 transition-all shadow-[0_0_15px_-2px_var(--primary)] text-primary group-hover:shadow-[0_0_30px_0px_var(--primary)]">
+                  <Leaf className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow-[0_0_8px_var(--primary)]" strokeWidth={1.5} />
                 </div>
-                <div className="text-center sm:text-left">
-                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">50<span className="text-primary">+</span></div>
-                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Products</div>
+                <div className="text-center flex flex-col items-center">
+                  <div className="text-xl sm:text-4xl font-extrabold text-white mb-2 tracking-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">50+</div>
+                  <div className="text-[10px] sm:text-[13px] uppercase tracking-widest text-primary font-bold leading-relaxed drop-shadow-[0_0_8px_var(--primary)]">
+                    Agricultural<br />Products
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-2 sm:gap-4 group p-2 sm:p-0 rounded-xl hover:bg-white/5 sm:hover:bg-transparent transition-colors">
-                <div className="p-2.5 sm:p-3 rounded-full sm:rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 group-hover:bg-primary/20 sm:group-hover:bg-primary/20 transition-all shadow-[0_0_15px_-5px_var(--primary)] text-primary">
-                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+              <div className="flex flex-col items-center gap-2 group p-2 sm:p-0 rounded-xl transition-colors">
+                <div className="flex flex-col items-center gap-2 mb-1">
+                  <div className="p-4 sm:p-5 rounded-full border border-primary bg-primary/5 transition-all shadow-[0_0_15px_-2px_var(--primary)] text-primary relative group-hover:shadow-[0_0_30px_0px_var(--primary)]">
+                    <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 relative z-10 drop-shadow-[0_0_8px_var(--primary)]" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-[8px] sm:text-[10px] text-primary/90 font-bold uppercase tracking-widest drop-shadow-[0_0_8px_var(--primary)]">ISO | FSSAI</span>
                 </div>
-                <div className="text-center sm:text-left">
-                  <div className="text-xl sm:text-3xl font-black text-white mb-0 sm:mb-1 tracking-tight">100<span className="text-primary">%</span></div>
-                  <div className="text-[9px] sm:text-xs uppercase tracking-widest text-primary/80 sm:text-white/50 font-bold sm:font-medium">Assured</div>
+                <div className="text-center flex flex-col items-center">
+                  <div className="text-[11px] sm:text-[14px] leading-relaxed font-bold text-white uppercase tracking-widest drop-shadow-[0_0_5px_rgba(255,255,255,0.4)]">
+                    Certified<br />Quality<br />
+                    <span className="text-primary font-extrabold drop-shadow-[0_0_10px_var(--primary)]">Standards</span>
+                  </div>
                 </div>
               </div>
+
             </div>
           </motion.div>
         </motion.div>

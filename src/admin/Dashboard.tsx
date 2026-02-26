@@ -25,24 +25,17 @@ const AdminDashboard = () => {
             try {
                 // Fetch basic counts
                 // Note: Real implementation would use properly structured RPC calls or aggregated queries
-                const { count: productsCount } = await supabase
-                    .from('products')
-                    .select('*', { count: 'exact', head: true });
-
-                const { count: inquiriesCount } = await supabase
-                    .from('inquiries')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('status', 'new');
-
-                const { count: featuredCount } = await supabase
-                    .from('products')
-                    .select('*', { count: 'exact', head: true })
-                    .eq('is_featured', true);
-
-                // Fetch categories
-                const { count: categoriesCount } = await supabase
-                    .from('categories')
-                    .select('*', { count: 'exact', head: true });
+                const [
+                    { count: productsCount },
+                    { count: inquiriesCount },
+                    { count: featuredCount },
+                    { count: categoriesCount }
+                ] = await Promise.all([
+                    supabase.from('products').select('*', { count: 'exact', head: true }),
+                    supabase.from('inquiries').select('*', { count: 'exact', head: true }).eq('status', 'new'),
+                    supabase.from('products').select('*', { count: 'exact', head: true }).eq('is_featured', true),
+                    supabase.from('categories').select('*', { count: 'exact', head: true })
+                ]);
 
                 setStats({
                     products: productsCount || 0,

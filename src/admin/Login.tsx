@@ -19,15 +19,36 @@ const AdminLogin = () => {
         setError(null);
 
         try {
+            // First, attempt to sign in normally
             const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
 
-            if (error) throw error;
+            if (error) {
+                // If this is the requested new admin id/password and it failed due to invalid credentials, 
+                // we automatically sign them up and set their role to admin.
+                if (email === "sevenhillsglobalprivatelimited@gmail.com" && password === "8500336668") {
+                    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+                        email,
+                        password,
+                    });
+
+                    if (signUpError) {
+                        throw signUpError;
+                    }
+
+                    // Auto-assign admin role
+                    if (signUpData.user) {
+                        await supabase.from("profiles").upsert({ id: signUpData.user.id, role: "admin" });
+                        navigate("/admin/dashboard");
+                    }
+                    return;
+                }
+                throw error;
+            }
 
             // If we have a valid session, allow admin access.
-            // The credential itself is the gate — only the site owner knows the password.
             if (data.session) {
                 navigate("/admin/dashboard");
             }
