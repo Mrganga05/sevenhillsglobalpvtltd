@@ -65,7 +65,7 @@ const AdminLogin = () => {
         setError(null);
 
         const trimmedEmail = email.trim().toLowerCase();
-        const trimmedPassword = password.trim();
+        const trimmedPassword = password;
 
         // Basic client-side validation before hitting the network
         if (!trimmedEmail || !trimmedPassword) {
@@ -80,6 +80,13 @@ const AdminLogin = () => {
         }
 
         try {
+            // DEBUG: log what's being sent (remove after fixing)
+            console.log("[Auth Debug] Attempting login with:", {
+                email: trimmedEmail,
+                passwordLength: trimmedPassword.length,
+                passwordFirst2Chars: trimmedPassword.slice(0, 2) + "***",
+            });
+
             const { data, error: authError } = await supabase.auth.signInWithPassword({
                 email: trimmedEmail,
                 password: trimmedPassword,

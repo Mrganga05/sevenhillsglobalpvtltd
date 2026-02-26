@@ -7,6 +7,7 @@ import { ProductInquiryForm } from "../components/ProductInquiryForm";
 import { getFallbackImage } from "../utils/productImages";
 import { useCart } from "../context/CartContext";
 import { SimilarProducts } from "../components/SimilarProducts";
+import { SubProductsSection } from "../components/SubProductsSection";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -146,10 +147,10 @@ const ProductDetail = () => {
           >
             <div className="space-y-8">
               <div>
-                <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+                <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold text-primary mb-4 sm:mb-6 leading-tight">
                   {product.name}
                 </h1>
-                <p className="text-muted-foreground text-sm sm:text-xl leading-relaxed">
+                <p className="text-primary/80 text-sm sm:text-xl leading-relaxed">
                   {product.full_description}
                 </p>
               </div>
@@ -217,27 +218,6 @@ const ProductDetail = () => {
 
               {/* Specs and Variations */}
               <div className="pt-8 border-t border-border">
-                {subproducts.length > 0 && (
-                  <div className="mb-10">
-                    <h3 className="font-bold text-xl sm:text-2xl mb-4 flex items-center gap-2">
-                      <ListTree className="w-6 h-6 text-primary" /> Available Variations & Grades
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-6">
-                      We offer multiple grades and processing types for this product. Select your required specification when requesting a quote.
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {subproducts.map((sp: { id: string, name: string }) => (
-                        <div
-                          key={sp.id}
-                          className="bg-muted/30 border border-white/5 p-4 rounded-xl flex items-center gap-3 hover:bg-white/5 hover:border-primary/30 transition-colors"
-                        >
-                          <div className="w-2 h-2 rounded-full bg-primary" />
-                          <span className="font-semibold text-foreground">{sp.name}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
                 <div>
                   <h3 className="font-bold text-xl mb-4 flex items-center gap-2">
@@ -264,6 +244,11 @@ const ProductDetail = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Sub Products Section */}
+        {subproducts.length > 0 && (
+          <SubProductsSection subproducts={subproducts} parentProduct={product} />
+        )}
 
         {/* Similar Products Section */}
         {product.id && (

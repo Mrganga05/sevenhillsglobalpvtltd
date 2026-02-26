@@ -35,9 +35,9 @@ const ProductsSection = () => {
         </motion.div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-6 max-w-5xl mx-auto">
             {[1, 2].map((i) => (
-              <div key={i} className="animate-pulse h-[400px] rounded-2xl bg-muted border border-border"></div>
+              <div key={i} className="animate-pulse h-[250px] sm:h-[400px] rounded-2xl bg-muted border border-border"></div>
             ))}
           </div>
         ) : isError || !displayProducts || displayProducts.length === 0 ? (
@@ -50,7 +50,7 @@ const ProductsSection = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-6 lg:gap-8 max-w-5xl mx-auto"
           >
             {displayProducts.map((product, i) => {
               const fallback = getFallbackImage(product.name);
@@ -69,7 +69,7 @@ const ProductsSection = () => {
                   <Link to={`/products/${product.slug}`} className="absolute inset-0 z-10">
                     <span className="sr-only">View {product.name}</span>
                   </Link>
-                  <div className="relative w-full h-52 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-muted">
+                  <div className="relative w-full h-32 sm:h-64 md:h-72 lg:h-80 overflow-hidden bg-muted">
                     <img
                       src={image}
                       alt={product.name}
@@ -78,17 +78,17 @@ const ProductsSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
 
-                  <div className="relative p-5 sm:p-7 lg:p-8 flex flex-col flex-1 bg-card/60 backdrop-blur-xl border-t border-white/5 z-20 pointer-events-none">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300">
+                  <div className="relative p-3 sm:p-7 lg:p-8 flex flex-col flex-1 bg-card/60 backdrop-blur-xl border-t border-white/5 z-20 pointer-events-none">
+                    <h3 className="text-sm sm:text-2xl lg:text-3xl font-bold text-primary mb-1 sm:mb-3 group-hover:text-primary transition-colors duration-300">
                       {product.name}
                     </h3>
-                    <p className="text-sm sm:text-base text-muted-foreground line-clamp-3 mb-5 sm:mb-6 flex-1 leading-relaxed">
+                    <p className="text-xs sm:text-base text-muted-foreground line-clamp-2 sm:line-clamp-3 mb-3 sm:mb-6 flex-1 leading-relaxed">
                       {product.short_description}
                     </p>
                     <div
-                      className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-xs sm:text-sm w-fit"
+                      className="inline-flex items-center gap-1 sm:gap-2 text-primary font-bold uppercase tracking-wider text-[10px] sm:text-sm w-fit"
                     >
-                      View Details <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                      View Details <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-2" />
                     </div>
                   </div>
                 </motion.div>

@@ -130,10 +130,14 @@ const Contact = () => {
                             <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-6 group-hover:bg-gold/20 transition-colors border border-gold/20">
                                 <Mail className="w-6 h-6 text-gold" />
                             </div>
-                            <h3 className="text-xl font-serif font-bold text-foreground mb-3">Email</h3>
-                            <p className="text-muted-foreground font-sans mb-1">For general & business inquiries:</p>
-                            <a href="mailto:sevenhillsglobalprivatelimited@gmail.com" className="text-base sm:text-lg font-semibold text-foreground hover:text-gold transition-colors block break-all">
+                            <h3 className="text-xl font-serif font-bold text-foreground mb-3">Email Details</h3>
+                            <p className="text-muted-foreground font-sans mb-1 text-sm font-semibold">General & Company Details:</p>
+                            <a href="mailto:sevenhillsglobalprivatelimited@gmail.com" className="text-sm sm:text-base text-foreground hover:text-gold transition-colors block break-all mb-4">
                                 sevenhillsglobalprivatelimited@gmail.com
+                            </a>
+                            <p className="text-muted-foreground font-sans mb-1 text-sm font-semibold">Business Inquiries:</p>
+                            <a href="mailto:Sevenhillsexpo7@gmail.com" className="text-sm sm:text-base text-foreground hover:text-gold transition-colors block break-all">
+                                Sevenhillsexpo7@gmail.com
                             </a>
                         </div>
                     </motion.div>

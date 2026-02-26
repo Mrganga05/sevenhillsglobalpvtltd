@@ -17,7 +17,7 @@ const ContactSection = () => {
     e.preventDefault();
     const subject = `Quote Request - ${formData.product || "General Inquiry"}`;
     const body = `Name: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AProduct: ${formData.product}%0AMessage: ${formData.message}`;
-    window.location.href = `mailto:sevenhillsglobalprivatelimited@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:Sevenhillsexpo7@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -161,9 +161,20 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-serif font-bold text-primary text-lg mb-2">Email Inquiry</h4>
-                  <a href="mailto:sevenhillsglobalprivatelimited@gmail.com" className="text-sm sm:text-base text-primary/60 font-sans hover:text-primary transition-colors break-all font-medium">
-                    sevenhillsglobalprivatelimited@gmail.com
-                  </a>
+                  <div className="space-y-3">
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-primary/40 font-bold mb-1">Company Details</span>
+                      <a href="mailto:sevenhillsglobalprivatelimited@gmail.com" className="text-sm sm:text-base text-primary/60 font-sans hover:text-primary transition-colors break-all font-medium">
+                        sevenhillsglobalprivatelimited@gmail.com
+                      </a>
+                    </div>
+                    <div>
+                      <span className="block text-xs uppercase tracking-wider text-primary/40 font-bold mb-1">Business Inquiries</span>
+                      <a href="mailto:Sevenhillsexpo7@gmail.com" className="text-sm sm:text-base text-primary/60 font-sans hover:text-primary transition-colors break-all font-medium">
+                        Sevenhillsexpo7@gmail.com
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

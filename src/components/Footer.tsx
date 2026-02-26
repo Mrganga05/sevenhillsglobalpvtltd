@@ -46,10 +46,22 @@ const Footer = () => {
                 +91 85003 36668
               </a>
               <a href="mailto:sevenhillsglobalprivatelimited@gmail.com" className="flex items-center gap-3 text-sm text-primary/60 hover:text-primary transition-colors font-sans break-all group">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
                   <Mail className="w-4 h-4 text-primary" />
                 </div>
-                sevenhillsglobalprivatelimited@gmail.com
+                <span>
+                  <span className="block text-xs uppercase tracking-wider mb-0.5 opacity-70">Company Details</span>
+                  sevenhillsglobalprivatelimited@gmail.com
+                </span>
+              </a>
+              <a href="mailto:Sevenhillsexpo7@gmail.com" className="flex items-center gap-3 text-sm text-primary/60 hover:text-primary transition-colors font-sans break-all group">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+                  <Mail className="w-4 h-4 text-primary" />
+                </div>
+                <span>
+                  <span className="block text-xs uppercase tracking-wider mb-0.5 opacity-70">Business Inquiries</span>
+                  Sevenhillsexpo7@gmail.com
+                </span>
               </a>
               <div className="flex items-start gap-3 text-sm text-primary/60 font-sans group">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
