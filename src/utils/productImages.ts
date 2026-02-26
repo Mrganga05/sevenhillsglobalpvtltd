@@ -46,7 +46,8 @@ export function getFallbackImage(productName: string): string | null {
     // Iterate through our map and check if the product name includes any of our keywords
     for (const [keyword, imageUrl] of Object.entries(PRODUCT_IMAGE_MAP)) {
         if (lowerName.includes(keyword)) {
-            return imageUrl;
+            // Guarantee low-bandwidth optimization on the fallbacks
+            return `${imageUrl}&w=800`;
         }
     }
 

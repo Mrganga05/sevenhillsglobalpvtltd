@@ -55,7 +55,7 @@ const About = () => {
                     >
                         <div className="aspect-[4/3] rounded-3xl overflow-hidden glass-card border border-border/50 group">
                             <img
-                                src="https://images.unsplash.com/photo-1595856468792-56b0d9111c1d?auto=format&fit=crop&q=80&w=1200"
+                                src="https://images.unsplash.com/photo-1595856468792-56b0d9111c1d?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1200&h=900" /* Better quality crop */
                                 alt="Indian Agriculture"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />

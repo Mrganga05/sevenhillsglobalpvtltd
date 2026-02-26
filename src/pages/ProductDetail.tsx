@@ -58,8 +58,13 @@ const ProductDetail = () => {
   const fallback = getFallbackImage(product.name);
   const mainImage = product.image_url || fallback;
 
-  // Mock gallery images - replacing with fallback/main if real gallery isn't available
-  const images = product.gallery ? [mainImage, ...product.gallery] : [mainImage, ...Array(3).fill(fallback)];
+  // Only include valid string URLs from the gallery
+  const gallery = Array.isArray(product.gallery)
+    ? product.gallery.filter((url: string) => typeof url === 'string' && url.trim() !== '')
+    : [];
+
+  // Final array of image to swipe through
+  const images = [mainImage, ...gallery];
 
   return (
     <div className="bg-background pt-24 pb-16 min-h-screen">
@@ -116,18 +121,20 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Gallery Thumbnails */}
-            <div className="flex gap-3 mt-4 overflow-x-auto pb-2 no-scrollbar">
-              {images.map((img: string, idx: number) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImage(idx)}
-                  className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-primary shadow-md' : 'border-border opacity-50 hover:opacity-100'}`}
-                >
-                  <img src={img} alt={`${product.name} - view ${idx + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            {/* Gallery Thumbnails (only show if there are actual gallery items) */}
+            {images.length > 1 && (
+              <div className="flex gap-3 mt-4 overflow-x-auto pb-2 no-scrollbar">
+                {images.map((img: string, idx: number) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImage(idx)}
+                    className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-primary shadow-md' : 'border-border opacity-50 hover:opacity-100'}`}
+                  >
+                    <img src={img} alt={`${product.name} - view ${idx + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Right: Info Column */}

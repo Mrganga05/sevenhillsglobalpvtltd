@@ -80,7 +80,7 @@ const AdminLayout = () => {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 top-[73px] z-40 bg-background/95 backdrop-blur-md shadow-xl flex flex-col p-4 overflow-y-auto border-t border-border animate-in slide-in-from-top-2">
+                <div className="md:hidden fixed inset-0 top-[73px] z-40 bg-background/95 backdrop-blur-sm shadow-xl flex flex-col p-4 overflow-y-auto border-t border-border animate-in slide-in-from-top-2">
                     <nav className="flex-1 space-y-2">
                         {navLinks.map((link) => {
                             const Icon = link.icon;

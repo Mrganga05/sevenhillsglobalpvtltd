@@ -8,7 +8,6 @@ import { getFallbackImage } from "../utils/productImages";
 
 export const ProductCard = memo(({ product, index }: { product: any; index: number }) => {
     const navigate = useNavigate();
-    const [imageLoaded, setImageLoaded] = useState(false);
     const { addItem } = useCart();
 
     const whatsappMsg = encodeURIComponent(`Hello Seven Hills Global, I'm interested in ${product.name}. Please share details.`);
@@ -29,17 +28,12 @@ export const ProductCard = memo(({ product, index }: { product: any; index: numb
                 className="relative overflow-hidden bg-muted/20 rounded-t-xl sm:rounded-t-2xl h-40 sm:h-48 md:h-60 cursor-pointer"
                 onClick={() => navigate(`/products/${product.slug}`)}
             >
-                {/* Image Skeleton */}
-                {!imageLoaded && (
-                    <div className="absolute inset-0 bg-white/5 animate-pulse" />
-                )}
+                {/* Image Skeleton removed for robust loading */}
 
                 <img
                     src={image}
                     alt={product.name}
-                    loading="lazy"
-                    onLoad={() => setImageLoaded(true)}
-                    className={`w-full h-full object-cover rounded-t-xl sm:rounded-t-2xl transition-all duration-700 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'} group-hover:scale-110`}
+                    className="w-full h-full object-cover rounded-t-xl sm:rounded-t-2xl transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80 transition-opacity duration-300 pointer-events-none" />
 

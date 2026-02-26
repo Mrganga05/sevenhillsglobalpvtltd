@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import { supabase, supabaseAdmin } from "../lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,19 +19,22 @@ const AdminLogin = () => {
         setError(null);
 
         try {
+            const trimmedEmail = email.trim();
+            const trimmedPassword = password.trim();
+
             // First, attempt to sign in normally
             const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password,
+                email: trimmedEmail,
+                password: trimmedPassword,
             });
 
             if (error) {
                 // If this is the requested new admin id/password and it failed due to invalid credentials, 
                 // we automatically sign them up and set their role to admin.
-                if (email === "sevenhillsglobalprivatelimited@gmail.com" && password === "8500336668") {
+                if (trimmedEmail === "sevenhillsglobalprivatelimited@gmail.com" && trimmedPassword === "8500336668") {
                     const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-                        email,
-                        password,
+                        email: trimmedEmail,
+                        password: trimmedPassword,
                     });
 
                     if (signUpError) {
@@ -40,7 +43,7 @@ const AdminLogin = () => {
 
                     // Auto-assign admin role
                     if (signUpData.user) {
-                        await supabase.from("profiles").upsert({ id: signUpData.user.id, role: "admin" });
+                        await supabaseAdmin.from("profiles").upsert({ id: signUpData.user.id, role: "admin" });
                         navigate("/admin/dashboard");
                     }
                     return;
@@ -53,7 +56,11 @@ const AdminLogin = () => {
                 navigate("/admin/dashboard");
             }
         } catch (error: any) {
-            setError(error.message || "Invalid email or password");
+            if (error.message === "Failed to fetch") {
+                setError("Network error. Please check your internet connection.");
+            } else {
+                setError(error.message || "Invalid email or password");
+            }
         } finally {
             setLoading(false);
         }
@@ -63,8 +70,8 @@ const AdminLogin = () => {
         <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden">
             {/* Background aesthetics */}
             <div className="absolute inset-0 forest-gradient opacity-50 z-0"></div>
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl z-0"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald/5 rounded-full blur-3xl z-0"></div>
+            <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl z-0"></div>
+            <div className="hidden md:block absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald/5 rounded-full blur-3xl z-0"></div>
 
             <Card className="w-full max-w-md glass-card z-10 border-border/50">
                 <CardHeader className="space-y-3 pb-6 border-b border-border/30">
@@ -94,7 +101,7 @@ const AdminLogin = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground"
+                                className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground py-3 sm:py-2 text-base sm:text-sm"
                             />
                         </div>
                         <div className="space-y-2">
@@ -107,14 +114,14 @@ const AdminLogin = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground"
+                                className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground py-3 sm:py-2 text-base sm:text-sm"
                             />
                         </div>
                     </CardContent>
-                    <CardFooter className="pt-2">
+                    <CardFooter className="pt-2 pb-6">
                         <Button
                             type="submit"
-                            className="w-full bg-gold hover:bg-gold-light text-forest font-semibold shine-sweep"
+                            className="w-full bg-gold hover:bg-gold-light text-forest font-semibold shine-sweep py-6 sm:py-4 text-base"
                             disabled={loading}
                         >
                             {loading ? "Signing in..." : "Access Dashboard"}
