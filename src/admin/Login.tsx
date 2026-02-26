@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase, supabaseAdmin } from "../lib/supabase";
+import { supabase } from "../lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,9 +41,8 @@ const AdminLogin = () => {
                         throw signUpError;
                     }
 
-                    // Auto-assign admin role
+                    // Auto-assign admin role via DB trigger; just navigate
                     if (signUpData.user) {
-                        await supabaseAdmin.from("profiles").upsert({ id: signUpData.user.id, role: "admin" });
                         navigate("/admin/dashboard");
                     }
                     return;
