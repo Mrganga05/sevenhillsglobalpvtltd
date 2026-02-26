@@ -6,6 +6,52 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lock, Mail } from "lucide-react";
 
+/** Maps Supabase Auth error codes/messages to human-readable text. */
+function getAuthErrorMessage(error: any): string {
+    const msg: string = error?.message ?? "";
+    const status: number = error?.status ?? 0;
+
+    // Log the full raw error so you can inspect it in DevTools console
+    console.error("[Supabase Auth Error]", {
+        message: msg,
+        status,
+        name: error?.name,
+        code: error?.code,
+        fullError: error,
+    });
+
+    // Map common Supabase Auth 400 causes
+    if (msg.includes("Invalid login credentials")) {
+        return "Incorrect email or password. Make sure the account exists in Supabase Auth and the email is confirmed.";
+    }
+    if (msg.includes("Email not confirmed")) {
+        return "Your email address is not confirmed. Please check your inbox and click the confirmation link.";
+    }
+    if (msg.includes("User not found")) {
+        return "No account found with this email. Please create the user in the Supabase Dashboard first.";
+    }
+    if (msg.includes("Password should be")) {
+        return "Password does not meet requirements. Supabase requires a minimum of 6 characters.";
+    }
+    if (msg.includes("signup is disabled") || msg.includes("Signups not allowed")) {
+        return "New sign-ups are disabled on this Supabase project. Enable it in Authentication → Settings.";
+    }
+    if (msg === "Failed to fetch" || status === 0) {
+        return "Network error. Cannot reach Supabase. Check your internet connection.";
+    }
+    if (status === 400) {
+        return `Bad request (400): ${msg}. Check Supabase Dashboard → Authentication → Users to confirm this account exists and is confirmed.`;
+    }
+    if (status === 422) {
+        return "Invalid email format or missing required fields.";
+    }
+    if (status === 429) {
+        return "Too many login attempts. Please wait a few minutes and try again.";
+    }
+
+    return msg || "Login failed. Please try again.";
+}
+
 const AdminLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,48 +64,43 @@ const AdminLogin = () => {
         setLoading(true);
         setError(null);
 
-        try {
-            const trimmedEmail = email.trim();
-            const trimmedPassword = password.trim();
+        const trimmedEmail = email.trim().toLowerCase();
+        const trimmedPassword = password.trim();
 
-            // First, attempt to sign in normally
-            const { data, error } = await supabase.auth.signInWithPassword({
+        // Basic client-side validation before hitting the network
+        if (!trimmedEmail || !trimmedPassword) {
+            setError("Please enter both email and password.");
+            setLoading(false);
+            return;
+        }
+        if (trimmedPassword.length < 6) {
+            setError("Password must be at least 6 characters.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const { data, error: authError } = await supabase.auth.signInWithPassword({
                 email: trimmedEmail,
                 password: trimmedPassword,
             });
 
-            if (error) {
-                // If this is the requested new admin id/password and it failed due to invalid credentials, 
-                // we automatically sign them up and set their role to admin.
-                if (trimmedEmail === "sevenhillsglobalprivatelimited@gmail.com" && trimmedPassword === "8500336668") {
-                    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-                        email: trimmedEmail,
-                        password: trimmedPassword,
-                    });
-
-                    if (signUpError) {
-                        throw signUpError;
-                    }
-
-                    // Auto-assign admin role via DB trigger; just navigate
-                    if (signUpData.user) {
-                        navigate("/admin/dashboard");
-                    }
-                    return;
-                }
-                throw error;
+            if (authError) {
+                // Full error detail is logged inside getAuthErrorMessage
+                setError(getAuthErrorMessage(authError));
+                return;
             }
 
-            // If we have a valid session, allow admin access.
-            if (data.session) {
+            if (data?.session) {
+                console.log("[Auth] Login successful. User:", data.user?.email);
                 navigate("/admin/dashboard");
-            }
-        } catch (error: any) {
-            if (error.message === "Failed to fetch") {
-                setError("Network error. Please check your internet connection.");
             } else {
-                setError(error.message || "Invalid email or password");
+                // Session is null despite no error — should not happen, but handle gracefully
+                setError("Login succeeded but no session was returned. Please try again.");
             }
+        } catch (unexpected: any) {
+            console.error("[Auth] Unexpected error:", unexpected);
+            setError(getAuthErrorMessage(unexpected));
         } finally {
             setLoading(false);
         }
@@ -100,6 +141,7 @@ const AdminLogin = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
+                                autoComplete="email"
                                 className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground py-3 sm:py-2 text-base sm:text-sm"
                             />
                         </div>
@@ -113,6 +155,7 @@ const AdminLogin = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                autoComplete="current-password"
                                 className="bg-background/50 border-border/50 focus:border-gold/50 focus:ring-gold/20 text-foreground py-3 sm:py-2 text-base sm:text-sm"
                             />
                         </div>
@@ -123,7 +166,7 @@ const AdminLogin = () => {
                             className="w-full bg-gold hover:bg-gold-light text-forest font-semibold shine-sweep py-6 sm:py-4 text-base"
                             disabled={loading}
                         >
-                            {loading ? "Signing in..." : "Access Dashboard"}
+                            {loading ? "Signing in…" : "Access Dashboard"}
                         </Button>
                     </CardFooter>
                 </form>

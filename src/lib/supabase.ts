@@ -1,13 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '../types/database.types';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Anon key is intentionally public — safe to embed in frontend code.
+// Supabase Row Level Security (RLS) controls what this key can access.
+// Fallback values ensure Vercel builds work even if env vars aren't configured.
+const supabaseUrl =
+    import.meta.env.VITE_SUPABASE_URL ||
+    'https://uguvemllaweahpiqltky.supabase.co';
 
-// Basic validation to warn if vars are missing during dev
-if (!supabaseUrl || !supabaseAnonKey) {
-    console.warn('Supabase UI/Anon Key missing from environment variables. Make sure your .env file is set up.');
-}
+const supabaseAnonKey =
+    import.meta.env.VITE_SUPABASE_ANON_KEY ||
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVndXZlbWxsYXdlYWhwaXFsdGt5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3MjI3NjEsImV4cCI6MjA4NzI5ODc2MX0.EIggaFZWvR2y-1Uk_sjte0YL433e8nsToa7R3BTdogw';
 
 // Single singleton instance to prevent "Multiple GoTrueClient instances detected" warning
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
