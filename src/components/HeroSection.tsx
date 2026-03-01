@@ -144,8 +144,8 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-[2.8rem] xxs:text-[3.2rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[1.1] sm:leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center justify-center text-center tracking-normal w-full"
           >
-            {/* Animated SEVEN HILLS - Brilliant Glowing White (Alive) with adjusted diffuse shadow */}
-            <span className="text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.8)] sm:drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10 w-full xs:whitespace-nowrap">
+            {/* Animated SEVEN HILLS - Reduced Glowing White with adjusted diffuse shadow */}
+            <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] sm:drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10 w-full xs:whitespace-nowrap">
               {"SEVEN HILLS".split("").map((letter, index) => (
                 <motion.span
                   key={index}
@@ -155,11 +155,11 @@ const HeroSection = () => {
                     opacity: 1,
                     scale: 1,
                     rotateX: 0,
-                    textShadow: ["0px 0px 10px rgba(255,255,255,0.2)", "0px 0px 25px rgba(255,255,255,0.6)", "0px 0px 10px rgba(255,255,255,0.2)"]
+                    textShadow: ["0px 0px 8px rgba(255,255,255,0.3)", "0px 0px 20px rgba(255,255,255,0.6)", "0px 0px 8px rgba(255,255,255,0.3)"]
                   }}
-                  whileHover={{ scale: 1.15, translateY: -8, color: "#ffffff", textShadow: "0px 0px 40px rgba(255,255,255,0.9)" }}
+                  whileHover={{ scale: 1.15, translateY: -8, color: "#ffffff", textShadow: "0px 0px 30px rgba(255,255,255,0.8), 0px 0px 10px rgba(255,255,255,0.6)" }}
                   transition={{
-                    textShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
+                    textShadow: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
                     default: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 + index * 0.05 }
                   }}
                   className={letter === " " ? "w-[0.2em] xs:w-[0.3em] inline-block" : "inline-block cursor-default relative transition-colors duration-300 transform-gpu z-10"}
@@ -170,19 +170,24 @@ const HeroSection = () => {
               ))}
             </span>
             <span className="mt-1 xxs:mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20 w-full xs:whitespace-nowrap">
-              {/* Animated GLOBAL - Bright Gold */}
-              <span className="flex overflow-visible text-[#F4C430] font-black drop-shadow-[0_0_15px_rgba(0,0,0,0.9)] sm:drop-shadow-[0_0_20px_rgba(244,196,48,0.8)] py-1 relative z-20 text-[2.8rem] xxs:text-[3.5rem] sm:text-[inherit]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
+              {/* Animated GLOBAL - Full Gold Color with Reduced Glow */}
+              <span className="flex overflow-visible text-[#FFD700] font-black drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] sm:drop-shadow-[0_0_20px_rgba(255,215,0,0.6)] py-1 relative z-20 text-[2.8rem] xxs:text-[3.5rem] sm:text-[inherit]">
                 {"GLOBAL".split("").map((letter, index) => (
                   <motion.span
                     key={index}
                     initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.5,
-                      ease: [0.2, 0.65, 0.3, 0.9],
-                      delay: 1.2 + index * 0.08, // Starts after SEVEN HILLS
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      textShadow: ["0px 0px 8px rgba(255,215,0,0.4)", "0px 0px 20px rgba(255,215,0,0.7)", "0px 0px 8px rgba(255,215,0,0.4)"]
                     }}
-                    className="inline-block"
+                    whileHover={{ scale: 1.15, translateY: -8, color: "#FFE066", textShadow: "0px 0px 30px rgba(255,215,0,0.9), 0px 0px 15px rgba(255,215,0,0.7)" }}
+                    transition={{
+                      textShadow: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
+                      default: { duration: 0.5, ease: [0.2, 0.65, 0.3, 0.9], delay: 1.2 + index * 0.08 }
+                    }}
+                    className="inline-block cursor-default relative transition-colors duration-300 transform-gpu z-20"
+                    style={{ transformOrigin: 'center' }}
                   >
                     {letter}
                   </motion.span>

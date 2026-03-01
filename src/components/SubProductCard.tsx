@@ -1,11 +1,13 @@
 import { memo } from "react";
 import { MessageCircle, ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { DEFAULT_PRODUCT_IMAGE } from "../constants/defaultImage";
 import { getFallbackImage } from "../utils/productImages";
 
 export const SubProductCard = memo(({ product, index, parentProduct }: { product: any; index: number; parentProduct: any }) => {
+    const navigate = useNavigate();
     const { addItem } = useCart();
 
     const whatsappMsg = encodeURIComponent(`Hello Seven Hills Global, I'm interested in ${product.name} (Variation of ${parentProduct.name}). Please share details.`);
@@ -15,14 +17,24 @@ export const SubProductCard = memo(({ product, index, parentProduct }: { product
 
     return (
         <motion.div
+            onClick={() => {
+                navigate(`/products/${parentProduct.slug}`);
+                window.scrollTo(0, 0);
+            }}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            className="group flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl h-full border border-white/5 hover:border-primary/50 bg-card/60 backdrop-blur-xl transition-colors duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+            className="group flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl h-full border border-white/5 hover:border-primary/50 bg-card/60 backdrop-blur-xl transition-colors duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] cursor-pointer"
         >
-            <div className="relative overflow-hidden bg-muted/20 rounded-t-xl sm:rounded-t-2xl h-32 sm:h-48 md:h-60">
+            <div
+                className="relative overflow-hidden bg-muted/20 rounded-t-xl sm:rounded-t-2xl h-32 sm:h-48 md:h-60 cursor-pointer"
+                onClick={() => {
+                    navigate(`/products/${parentProduct.slug}`);
+                    window.scrollTo(0, 0);
+                }}
+            >
                 <img
                     src={image}
                     alt={product.name}
@@ -40,7 +52,13 @@ export const SubProductCard = memo(({ product, index, parentProduct }: { product
             </div>
 
             <div className="p-3 sm:p-4 md:p-5 flex flex-col flex-1 relative z-10 bg-gradient-to-b from-transparent to-background/50">
-                <h3 className="text-sm sm:text-base md:text-lg font-bold text-primary mb-1.5 line-clamp-1 group-hover:text-primary transition-colors duration-300">
+                <h3
+                    className="text-sm sm:text-base md:text-lg font-bold text-primary mb-1.5 line-clamp-1 group-hover:text-primary transition-colors duration-300 cursor-pointer"
+                    onClick={() => {
+                        navigate(`/products/${parentProduct.slug}`);
+                        window.scrollTo(0, 0);
+                    }}
+                >
                     {product.name}
                 </h3>
                 <p className="text-[10px] sm:text-xs md:text-sm text-primary/80 line-clamp-2 mb-4 leading-relaxed flex-1">
@@ -79,6 +97,7 @@ export const SubProductCard = memo(({ product, index, parentProduct }: { product
                         href={`https://wa.me/918500336668?text=${whatsappMsg}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="w-full inline-flex items-center justify-center gap-1.5 bg-white/5 border border-white/10 text-primary hover:bg-primary/10 hover:border-primary/30 text-[10px] sm:text-xs font-bold py-2 rounded-lg transition-all duration-300"
                     >
                         <MessageCircle className="w-3.5 h-3.5" /> Inquiry

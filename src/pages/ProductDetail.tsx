@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Award, MapPin, Package, MessageCircle, PackageOpen, ShoppingCart, Check, ListTree, Box } from "lucide-react";
 import { motion } from "framer-motion";
 import { useProductBySlug, useSubproducts } from "../hooks/useDatabase";
@@ -20,6 +20,12 @@ const ProductDetail = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Reset active image when changing products
+    setActiveImage(0);
+  }, [slug]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
