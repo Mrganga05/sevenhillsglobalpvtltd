@@ -184,15 +184,7 @@ const ProductDetail = () => {
 
               {/* Add to Cart - Interactive Area */}
               <div className="bg-card p-6 rounded-3xl border border-border shadow-md space-y-4">
-                <div className="flex items-end justify-between mb-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Price</p>
-                    {product.price ? (
-                      <p className="font-bold text-3xl sm:text-4xl text-foreground">₹{product.price}</p>
-                    ) : (
-                      <p className="font-bold text-2xl text-foreground">Request Quote</p>
-                    )}
-                  </div>
+                <div className="flex items-center justify-end mb-4">
                   <div className="text-right">
                     <p className="text-green-600 text-sm font-bold flex items-center gap-1.5"><Check className="w-4 h-4" /> Global Shipping Available</p>
                   </div>

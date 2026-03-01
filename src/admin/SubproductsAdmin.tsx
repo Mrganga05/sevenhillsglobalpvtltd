@@ -272,18 +272,6 @@ const SubproductsAdmin = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-foreground">Price ($)</label>
-                                        <Input
-                                            name="price"
-                                            type="number"
-                                            step="0.01"
-                                            value={formData.price}
-                                            onChange={handleChange}
-                                            className="bg-background/50 border-border/50 focus:border-gold/50"
-                                            placeholder="0.00"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
                                         <label className="text-sm font-semibold text-foreground">Image *</label>
                                         <div className="p-2 border border-dashed border-border/50 rounded-xl bg-background/30 hover:bg-white/5 transition-colors group relative h-10 flex items-center justify-center overflow-hidden">
                                             <Input
@@ -322,62 +310,63 @@ const SubproductsAdmin = () => {
                 </Dialog>
             </div>
 
-            {loading ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {[1, 2, 3].map(i => (
-                        <div key={i} className="glass-card h-64 animate-pulse rounded-2xl border border-border/30"></div>
-                    ))}
-                </div>
-            ) : subproducts.length === 0 ? (
-                <div className="text-center py-20 p-8 glass-card border border-border/50 max-w-2xl mx-auto rounded-2xl bg-card/40">
-                    <ListTree className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                    <h3 className="text-xl font-serif font-bold text-foreground mb-2">No Subproducts Yet</h3>
-                    <p className="text-muted-foreground mb-6">Add variants, types, or sub-items to this main product.</p>
-                </div>
-            ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {subproducts.map((subproduct) => (
-                        <div key={subproduct.id} className="glass-card rounded-2xl border border-border/50 bg-card/40 flex flex-col overflow-hidden group">
-                            <div className="relative h-48 bg-muted overflow-hidden">
-                                {subproduct.image_url ? (
-                                    <img src={subproduct.image_url} alt={subproduct.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center bg-background/50"><ImageIcon className="w-8 h-8 text-muted-foreground/30" /></div>
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
-                                <div className="absolute bottom-2 left-3 right-3 flex justify-between items-end">
-                                    <div>
-                                        <h3 className="font-serif font-bold text-lg text-foreground truncate drop-shadow-md">{subproduct.name}</h3>
-                                    </div>
-                                    {subproduct.price && <div className="text-white font-bold text-sm bg-black/50 px-2 py-1 rounded">${subproduct.price}</div>}
-                                </div>
-                            </div>
-                            <div className="p-4 flex flex-col flex-1">
-                                <p className="text-sm text-muted-foreground line-clamp-2 flex-1 mb-4">{subproduct.short_description}</p>
-                                <div className="flex items-center justify-between border-t border-border/30 pt-3">
-                                    <span className="text-xs text-muted-foreground font-medium">/{subproduct.slug}</span>
-                                    <div className="flex gap-2">
-                                        <button
-                                            onClick={() => handleEdit(subproduct)}
-                                            className="p-1.5 text-muted-foreground hover:text-gold hover:bg-gold/10 rounded-md transition-colors"
-                                            title="Edit"
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                                        </button>
-                                        <button
-                                            onClick={() => handleDelete(subproduct.id, subproduct.name)}
-                                            className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-colors"
-                                            title="Delete"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                        </button>
+            {
+                loading ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="glass-card h-64 animate-pulse rounded-2xl border border-border/30"></div>
+                        ))}
+                    </div>
+                ) : subproducts.length === 0 ? (
+                    <div className="text-center py-20 p-8 glass-card border border-border/50 max-w-2xl mx-auto rounded-2xl bg-card/40">
+                        <ListTree className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                        <h3 className="text-xl font-serif font-bold text-foreground mb-2">No Subproducts Yet</h3>
+                        <p className="text-muted-foreground mb-6">Add variants, types, or sub-items to this main product.</p>
+                    </div>
+                ) : (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {subproducts.map((subproduct) => (
+                            <div key={subproduct.id} className="glass-card rounded-2xl border border-border/50 bg-card/40 flex flex-col overflow-hidden group">
+                                <div className="relative h-48 bg-muted overflow-hidden">
+                                    {subproduct.image_url ? (
+                                        <img src={subproduct.image_url} alt={subproduct.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center bg-background/50"><ImageIcon className="w-8 h-8 text-muted-foreground/30" /></div>
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+                                    <div className="absolute bottom-2 left-3 right-3 flex justify-between items-end">
+                                        <div>
+                                            <h3 className="font-serif font-bold text-lg text-foreground truncate drop-shadow-md">{subproduct.name}</h3>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="p-4 flex flex-col flex-1">
+                                    <p className="text-sm text-muted-foreground line-clamp-2 flex-1 mb-4">{subproduct.short_description}</p>
+                                    <div className="flex items-center justify-between border-t border-border/30 pt-3">
+                                        <span className="text-xs text-muted-foreground font-medium">/{subproduct.slug}</span>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => handleEdit(subproduct)}
+                                                className="p-1.5 text-muted-foreground hover:text-gold hover:bg-gold/10 rounded-md transition-colors"
+                                                title="Edit"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(subproduct.id, subproduct.name)}
+                                                className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-colors"
+                                                title="Delete"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+                        ))}
+                    </div>
+                )
+            }
         </div>
     );
 };

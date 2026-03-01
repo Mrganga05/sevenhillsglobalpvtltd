@@ -60,18 +60,11 @@ export const ProductCard = memo(({ product, index }: { product: any; index: numb
 
                 {/* Specs Grid */}
                 <div className="grid grid-cols-2 gap-2 mb-4">
-                    {product.price ? (
+                    {product.origin && (
                         <div className="bg-white/5 rounded-lg p-2 border border-white/5 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
-                            <span className="block text-[8px] sm:text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Price</span>
-                            <span className="block text-[10px] sm:text-xs font-bold text-white truncate">₹{product.price}</span>
+                            <span className="block text-[8px] sm:text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Origin</span>
+                            <span className="block text-[10px] sm:text-xs font-semibold text-white/90 truncate">{product.origin}</span>
                         </div>
-                    ) : (
-                        product.origin && (
-                            <div className="bg-white/5 rounded-lg p-2 border border-white/5 backdrop-blur-sm group-hover:bg-white/10 transition-colors">
-                                <span className="block text-[8px] sm:text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Origin</span>
-                                <span className="block text-[10px] sm:text-xs font-semibold text-white/90 truncate">{product.origin}</span>
-                            </div>
-                        )
                     )}
                     {product.moq && (
                         <div className="bg-white/5 rounded-lg p-2 border border-white/5 backdrop-blur-sm group-hover:bg-white/10 transition-colors">

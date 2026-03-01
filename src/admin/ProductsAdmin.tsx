@@ -370,18 +370,6 @@ const ProductsManager = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-foreground">Price (₹)</label>
-                                        <Input
-                                            name="price"
-                                            type="number"
-                                            step="0.01"
-                                            value={formData.price}
-                                            onChange={handleChange}
-                                            className="bg-background/50 border-border/50 focus:border-gold/50"
-                                            placeholder="0.00"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
                                         <label className="text-sm font-semibold text-foreground">Type *</label>
                                         <Select
                                             value={productType}
@@ -563,7 +551,6 @@ const ProductsManager = () => {
                                         <h3 className="font-serif font-bold text-lg text-foreground truncate drop-shadow-md">{product.name}</h3>
                                         <p className="text-xs text-gold font-bold uppercase tracking-wider">{product.categories?.name}</p>
                                     </div>
-                                    {product.price && <div className="text-white font-bold text-sm bg-black/50 px-2 py-1 rounded">₹{product.price}</div>}
                                 </div>
                             </div>
                             <div className="p-4 flex flex-col flex-1">

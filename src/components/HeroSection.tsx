@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Leaf, Globe, ShieldCheck } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg.png";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
@@ -56,59 +56,67 @@ const HeroSection = () => {
           />
         </motion.div>
 
-        {/* Gradients - Reduced opacity by 20-30% */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/50 to-background/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/30 to-transparent" />
+        {/* Gradients - Much lighter overlay to keep background image highly visible, but dark at top for text readable */}
+        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-black/30 to-background/70" />
 
-        {/* Animated Gold Particles Flowing Up - Optimized count and hardware acceleration */}
-        {Array.from({ length: 50 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute bg-primary/70 rounded-full pointer-events-none shadow-[0_0_10px_var(--primary)] ${i > 5 ? 'hidden sm:block' : ''}`}
-            style={{
-              width: Math.random() * 2 + 1 + "px",
-              height: Math.random() * 2 + 1 + "px",
-              top: Math.random() * 100 + "%",
-              left: Math.random() * 100 + "%",
-              willChange: "transform, opacity",
-            }}
-            animate={{
-              y: [0, -Math.random() * 1200 - 600],
-              x: [0, Math.random() * 200 - 100],
-              opacity: [0, Math.random() * 0.7 + 0.3, 0],
-              scale: [0.8, 1.5, 0.8]
-            }}
-            transition={{
-              duration: Math.random() * 25 + 15,
-              repeat: Infinity,
-              ease: "linear",
-              delay: Math.random() * 10,
-            }}
-          />
-        ))}
+        {/* Dense Starfield / Tiny Particles (Extra Alive Background) */}
+        {Array.from({ length: 450 }).map((_, i) => {
+          const size = Math.random() * 2.5 + 0.5;
+          return (
+            <motion.div
+              key={`particle-${i}`}
+              className={`absolute rounded-full pointer-events-none bg-[#F4C430] shadow-[0_0_12px_#F4C430] ${i > 100 ? 'hidden md:block' : ''}`}
+              style={{
+                width: size + "px",
+                height: size + "px",
+                top: Math.random() * 100 + "%",
+                left: Math.random() * 100 + "%",
+                willChange: "transform, opacity",
+              }}
+              animate={{
+                y: [0, -Math.random() * 800 - 300],
+                x: [0, Math.random() * 500 - 250, 0],
+                opacity: [0, Math.random() * 0.9 + 0.3, 0],
+                scale: [0.2, Math.random() * 2.5 + 0.5, 0.2]
+              }}
+              transition={{
+                duration: Math.random() * 15 + 8,
+                repeat: Infinity,
+                ease: "linear",
+                delay: Math.random() * 15,
+              }}
+            />
+          );
+        })}
 
-        {/* Floating Leaves */}
-        {Array.from({ length: 6 }).map((_, i) => (
+        {/* Dynamic Floating Elements (Leaves & Glowing Orbs) */}
+        {Array.from({ length: 25 }).map((_, i) => (
           <motion.div
-            key={`leaf-${i}`}
-            className="absolute text-primary/20 pointer-events-none hidden sm:block"
+            key={`float-${i}`}
+            className="absolute text-[#F4C430]/30 pointer-events-none hidden sm:block mix-blend-screen"
             style={{
               top: Math.random() * 100 + "%",
               left: Math.random() * 100 + "%",
               willChange: "transform",
             }}
             animate={{
-              y: [0, -Math.random() * 100 - 50, 0],
-              x: [0, Math.random() * 100 - 50, 0],
-              rotate: [0, Math.random() * 360],
+              y: [0, -Math.random() * 150 - 50, 0],
+              x: [0, Math.random() * 150 - 75, 0],
+              rotate: [0, Math.random() * 360, 0],
+              scale: [1, Math.random() * 0.5 + 1.2, 1]
             }}
             transition={{
-              duration: Math.random() * 20 + 20,
+              duration: Math.random() * 15 + 15,
               repeat: Infinity,
               ease: "easeInOut",
             }}
           >
-            <Leaf size={Math.random() * 40 + 20} className="drop-shadow-lg" />
+            {i % 2 === 0 ? (
+              <Leaf size={Math.random() * 30 + 15} className="drop-shadow-[0_0_10px_#F4C430]" />
+            ) : (
+              <div className="w-5 h-5 rounded-full bg-[#F4C430]/30 blur-sm drop-shadow-[0_0_20px_#F4C430]"></div>
+            )}
           </motion.div>
         ))}
       </div>
@@ -122,41 +130,48 @@ const HeroSection = () => {
         >
           {/* Elegant Premium Badge */}
           <motion.div variants={itemVariants} className="mb-8 flex items-center justify-center w-full">
-            <div className="flex items-center gap-4 sm:gap-6">
-              <div className="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-primary"></div>
-              <span className="text-[10px] sm:text-xs md:text-sm font-light uppercase tracking-[0.4em] text-primary drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">
+            <div className="flex items-center gap-4 sm:gap-6 group cursor-default">
+              <div className="h-[1px] bg-gradient-to-r from-transparent to-[#D4AF37] w-12 sm:w-24"></div>
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.4em] text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">
                 TRUSTED GLOBAL EXPORT PARTNER
               </span>
-              <div className="h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-primary"></div>
+              <div className="h-[1px] bg-gradient-to-l from-transparent to-[#D4AF37] w-12 sm:w-24"></div>
             </div>
           </motion.div>
 
           {/* Main Typography */}
           <motion.h1
             variants={itemVariants}
-            className="text-[3rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center text-balance tracking-normal"
+            className="text-[3.2rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[1] sm:leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center text-balance tracking-normal"
           >
-            {/* Animated SEVEN HILLS - Reduced Glow */}
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/95 to-white/80 drop-shadow-[0_0_6px_rgba(255,255,255,0.15)] uppercase tracking-normal flex flex-wrap justify-center overflow-hidden py-1 sm:py-2" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
+            {/* Animated SEVEN HILLS - Brilliant Glowing White (Alive) with adjusted diffuse shadow */}
+            <span className="text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.8)] sm:drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10">
               {"SEVEN HILLS".split("").map((letter, index) => (
                 <motion.span
                   key={index}
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.2, 0.65, 0.3, 0.9],
-                    delay: 0.5 + index * 0.05,
+                  initial={{ y: "120%", opacity: 0, scale: 0.8, rotateX: -90 }}
+                  animate={{
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotateX: 0,
+                    textShadow: ["0px 0px 10px rgba(255,255,255,0.2)", "0px 0px 25px rgba(255,255,255,0.6)", "0px 0px 10px rgba(255,255,255,0.2)"]
                   }}
-                  className={letter === " " ? "w-[0.3em]" : "inline-block"}
+                  whileHover={{ scale: 1.15, translateY: -8, color: "#ffffff", textShadow: "0px 0px 40px rgba(255,255,255,0.9)" }}
+                  transition={{
+                    textShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
+                    default: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 + index * 0.05 }
+                  }}
+                  className={letter === " " ? "w-[0.3em]" : "inline-block cursor-default relative transition-colors duration-300 transform-gpu z-10"}
+                  style={{ transformOrigin: 'center' }}
                 >
                   {letter}
                 </motion.span>
               ))}
             </span>
-            <span className="mt-1 sm:mt-2 lg:mt-3 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase">
-              {/* Animated GLOBAL - Reduced Glow */}
-              <span className="flex overflow-hidden text-primary drop-shadow-[0_0_6px_var(--primary)]">
+            <span className="mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20">
+              {/* Animated GLOBAL - Bright Gold */}
+              <span className="flex overflow-visible text-[#F4C430] font-black drop-shadow-[0_0_15px_rgba(0,0,0,0.9)] sm:drop-shadow-[0_0_20px_rgba(244,196,48,0.8)] py-1 relative z-20" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.1)" }}>
                 {"GLOBAL".split("").map((letter, index) => (
                   <motion.span
                     key={index}
