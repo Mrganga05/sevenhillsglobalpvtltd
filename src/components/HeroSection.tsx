@@ -142,10 +142,10 @@ const HeroSection = () => {
           {/* Main Typography */}
           <motion.h1
             variants={itemVariants}
-            className="text-[3.2rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[1] sm:leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center text-balance tracking-normal"
+            className="text-[2.8rem] xxs:text-[3.2rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[1.1] sm:leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center justify-center text-center tracking-normal w-full"
           >
             {/* Animated SEVEN HILLS - Brilliant Glowing White (Alive) with adjusted diffuse shadow */}
-            <span className="text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.8)] sm:drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10">
+            <span className="text-white drop-shadow-[0_0_20px_rgba(0,0,0,0.8)] sm:drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10 w-full xs:whitespace-nowrap">
               {"SEVEN HILLS".split("").map((letter, index) => (
                 <motion.span
                   key={index}
@@ -162,16 +162,16 @@ const HeroSection = () => {
                     textShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
                     default: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 + index * 0.05 }
                   }}
-                  className={letter === " " ? "w-[0.3em]" : "inline-block cursor-default relative transition-colors duration-300 transform-gpu z-10"}
+                  className={letter === " " ? "w-[0.2em] xs:w-[0.3em] inline-block" : "inline-block cursor-default relative transition-colors duration-300 transform-gpu z-10"}
                   style={{ transformOrigin: 'center' }}
                 >
                   {letter}
                 </motion.span>
               ))}
             </span>
-            <span className="mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20">
+            <span className="mt-1 xxs:mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20 w-full xs:whitespace-nowrap">
               {/* Animated GLOBAL - Bright Gold */}
-              <span className="flex overflow-visible text-[#F4C430] font-black drop-shadow-[0_0_15px_rgba(0,0,0,0.9)] sm:drop-shadow-[0_0_20px_rgba(244,196,48,0.8)] py-1 relative z-20" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.1)" }}>
+              <span className="flex overflow-visible text-[#F4C430] font-black drop-shadow-[0_0_15px_rgba(0,0,0,0.9)] sm:drop-shadow-[0_0_20px_rgba(244,196,48,0.8)] py-1 relative z-20 text-[2.8rem] xxs:text-[3.5rem] sm:text-[inherit]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}>
                 {"GLOBAL".split("").map((letter, index) => (
                   <motion.span
                     key={index}
@@ -303,7 +303,7 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </section >
   );
 };
 
