@@ -35,14 +35,14 @@ const Header = () => {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={{ y: "-100%" }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 transform-gpu ${scrolled
           ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-lg"
           : "bg-transparent"
-      }`}
+        }`}
+      style={{ willChange: "transform, background-color" }}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-20">
@@ -90,10 +90,12 @@ const Header = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/50"
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            exit={{ opacity: 0, scaleY: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-border/50 origin-top transform-gpu"
+            style={{ willChange: "transform, opacity" }}
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (

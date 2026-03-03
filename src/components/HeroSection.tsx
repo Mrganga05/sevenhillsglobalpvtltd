@@ -39,34 +39,35 @@ const HeroSection = () => {
   return (
     <section id="home" className="w-full relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-background">
       {/* Dynamic Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Slow zoom background image */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black/20">
+        {/* Slow zoom background image - Optimized for mobile */}
         <motion.div
-          className="w-full h-full"
+          className="w-full h-full transform-gpu"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 10, ease: "easeOut" }}
+          style={{ willChange: "transform" }}
         >
           <img
             src={heroBg}
             alt="Seven Hills Global agricultural products showcase"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center md:object-[center_20%]"
             loading="eager"
             decoding="async"
           />
         </motion.div>
 
         {/* Gradients - Much lighter overlay to keep background image highly visible, but dark at top for text readable */}
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-background/50 md:bg-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-black/30 to-background/70" />
 
-        {/* Dense Starfield / Tiny Particles (Extra Alive Background) */}
-        {Array.from({ length: 450 }).map((_, i) => {
+        {/* Dense Starfield / Tiny Particles (Extra Alive Background) - Optimized count based on screen size via CSS */}
+        {Array.from({ length: 150 }).map((_, i) => {
           const size = Math.random() * 2.5 + 0.5;
           return (
             <motion.div
               key={`particle-${i}`}
-              className={`absolute rounded-full pointer-events-none bg-[#F4C430] shadow-[0_0_12px_#F4C430] ${i > 100 ? 'hidden md:block' : ''}`}
+              className={`absolute rounded-full pointer-events-none bg-[#F4C430] shadow-[0_0_12px_#F4C430] ${i > 30 ? 'hidden md:block' : ''}`}
               style={{
                 width: size + "px",
                 height: size + "px",
@@ -75,16 +76,16 @@ const HeroSection = () => {
                 willChange: "transform, opacity",
               }}
               animate={{
-                y: [0, -Math.random() * 800 - 300],
-                x: [0, Math.random() * 500 - 250, 0],
-                opacity: [0, Math.random() * 0.9 + 0.3, 0],
-                scale: [0.2, Math.random() * 2.5 + 0.5, 0.2]
+                y: [0, -Math.random() * 400 - 150],
+                x: [0, Math.random() * 300 - 150, 0],
+                opacity: [0, Math.random() * 0.7 + 0.2, 0],
+                scale: [0.5, Math.random() * 1.5 + 0.5, 0.5]
               }}
               transition={{
-                duration: Math.random() * 15 + 8,
+                duration: Math.random() * 15 + 10,
                 repeat: Infinity,
                 ease: "linear",
-                delay: Math.random() * 15,
+                delay: Math.random() * 10,
               }}
             />
           );
@@ -155,15 +156,14 @@ const HeroSection = () => {
                     opacity: 1,
                     scale: 1,
                     rotateX: 0,
-                    textShadow: ["0px 0px 8px rgba(255,255,255,0.3)", "0px 0px 20px rgba(255,255,255,0.6)", "0px 0px 8px rgba(255,255,255,0.3)"]
+                    textShadow: "0px 0px 10px rgba(255,255,255,0.4)"
                   }}
-                  whileHover={{ scale: 1.15, translateY: -8, color: "#ffffff", textShadow: "0px 0px 30px rgba(255,255,255,0.8), 0px 0px 10px rgba(255,255,255,0.6)" }}
+                  whileHover={{ scale: 1.15, translateY: -8, color: "#ffffff", textShadow: "0px 0px 20px rgba(255,255,255,0.6)" }}
                   transition={{
-                    textShadow: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
                     default: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9], delay: 0.3 + index * 0.05 }
                   }}
-                  className={letter === " " ? "w-[0.2em] xs:w-[0.3em] inline-block" : "inline-block cursor-default relative transition-colors duration-300 transform-gpu z-10"}
-                  style={{ transformOrigin: 'center' }}
+                  className={letter === " " ? "w-[0.2em] xs:w-[0.3em] inline-block" : "inline-block cursor-default relative transition-transform duration-300 transform-gpu z-10"}
+                  style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
                 >
                   {letter}
                 </motion.span>
@@ -179,15 +179,14 @@ const HeroSection = () => {
                     animate={{
                       y: 0,
                       opacity: 1,
-                      textShadow: ["0px 0px 8px rgba(255,215,0,0.4)", "0px 0px 20px rgba(255,215,0,0.7)", "0px 0px 8px rgba(255,215,0,0.4)"]
+                      textShadow: "0px 0px 12px rgba(255,215,0,0.5)"
                     }}
-                    whileHover={{ scale: 1.15, translateY: -8, color: "#FFE066", textShadow: "0px 0px 30px rgba(255,215,0,0.9), 0px 0px 15px rgba(255,215,0,0.7)" }}
+                    whileHover={{ scale: 1.15, translateY: -8, color: "#FFE066", textShadow: "0px 0px 25px rgba(255,215,0,0.8)" }}
                     transition={{
-                      textShadow: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 },
                       default: { duration: 0.5, ease: [0.2, 0.65, 0.3, 0.9], delay: 1.2 + index * 0.08 }
                     }}
-                    className="inline-block cursor-default relative transition-colors duration-300 transform-gpu z-20"
-                    style={{ transformOrigin: 'center' }}
+                    className="inline-block cursor-default relative transition-transform duration-300 transform-gpu z-20"
+                    style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
                   >
                     {letter}
                   </motion.span>

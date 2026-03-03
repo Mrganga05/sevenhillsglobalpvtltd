@@ -70,10 +70,11 @@ export default function Navbar() {
     return (
         <>
             <header
-                className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out pointer-events-auto ${isScrolled
+                className={`fixed left-0 right-0 z-50 transition-colors duration-300 ease-in-out pointer-events-auto transform-gpu ${isScrolled
                     ? "top-2 sm:top-6 mx-4 sm:mx-8 lg:mx-auto max-w-6xl bg-background/95 backdrop-blur-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5),inset_0_0_20px_rgba(var(--primary),0.2)] border border-white/20 rounded-full"
                     : "top-0 mx-0 bg-background/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none rounded-none border-b border-white/5"
                     }`}
+                style={{ willChange: "transform, background-color" }}
             >
                 <nav className={`mx-auto w-full transition-all duration-500 ${isScrolled ? "px-5 sm:px-8" : "max-w-7xl px-4 sm:px-6 lg:px-8"}`}>
                     <div className={`flex justify-between items-center transition-all duration-500 ${isScrolled ? "h-14 sm:h-16" : "h-16 sm:h-24"}`}>
@@ -163,7 +164,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="fixed inset-0 top-16 sm:top-20 z-40 bg-background lg:hidden border-t border-white/10 overflow-y-auto">
+                <div className="fixed inset-0 top-16 sm:top-20 z-40 bg-background lg:hidden border-t border-white/10 overflow-y-auto transform-gpu" style={{ willChange: "transform, opacity" }}>
                     <div className="flex flex-col h-full px-4 pb-8 pt-4">
                         <div className="space-y-1">
                             <NavLink to="/" className={({ isActive }) => `${mobLinkBase} ${isActive ? mobLinkActive : mobLinkNormal}`} onClick={() => setIsOpen(false)}>Home</NavLink>
