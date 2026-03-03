@@ -61,7 +61,7 @@ export const SubProductCard = memo(({ product, index, parentProduct }: { product
                 >
                     {product.name}
                 </h3>
-                <p className="text-[10px] sm:text-xs md:text-sm text-primary/80 line-clamp-2 mb-4 leading-relaxed flex-1">
+                <p className="text-[10px] sm:text-xs md:text-sm text-white/80 line-clamp-2 mb-4 leading-relaxed flex-1">
                     {product.short_description || parentProduct.short_description}
                 </p>
 
