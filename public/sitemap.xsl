@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+                xmlns:html="http://www.w3.org/TR/REC-html40"
+                xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:template match="/">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <title>XML Sitemap</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+          }
+          h1 {
+            color: #1a1a1a;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+          }
+          p {
+            color: #666;
+          }
+          table {
+            border: none;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 2rem;
+          }
+          th {
+            text-align: left;
+            padding: 12px;
+            background-color: #f8f9fa;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 14px;
+          }
+          td {
+            padding: 12px;
+            border-bottom: 1px solid #eaeaea;
+            font-size: 14px;
+          }
+          tr:hover td {
+            background-color: #f1f3f5;
+          }
+          a {
+            color: #0066cc;
+            text-decoration: none;
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+          .url-cell {
+            word-break: break-all;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="content">
+          <h1>XML Sitemap</h1>
+          <p>
+            This XML Sitemap is generated to be processed by search engines like Google and Bing.
+            <br/>
+            You can find more information about XML sitemaps on <a href="http://sitemaps.org">sitemaps.org</a>.
+          </p>
+          <p>
+            This sitemap contains <strong><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></strong> URLs.
+          </p>
+          <table cellpadding="3">
+            <thead>
+              <tr>
+                <th width="50%">URL</th>
+                <th width="20%">Priority</th>
+                <th width="30%">Change Frequency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+              <xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+              <xsl:for-each select="sitemap:urlset/sitemap:url">
+                <tr>
+                  <td class="url-cell">
+                    <xsl:variable name="itemURL">
+                      <xsl:value-of select="sitemap:loc"/>
+                    </xsl:variable>
+                    <a href="{$itemURL}">
+                      <xsl:value-of select="sitemap:loc"/>
+                    </a>
+                  </td>
+                  <td>
+                    <xsl:value-of select="concat(sitemap:priority*100,'%')"/>
+                  </td>
+                  <td>
+                    <xsl:value-of select="concat(translate(substring(sitemap:changefreq, 1, 1),concat($lower, $upper),concat($upper, $lower)),substring(sitemap:changefreq, 2))"/>
+                  </td>
+                </tr>
+              </xsl:for-each>
+            </tbody>
+          </table>
+        </div>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>

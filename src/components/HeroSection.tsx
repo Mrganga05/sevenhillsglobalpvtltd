@@ -145,8 +145,11 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-[2.8rem] xxs:text-[3.2rem] sm:text-6xl md:text-[5.5rem] lg:text-[7rem] xl:text-[8rem] font-extrabold leading-[1.1] sm:leading-[0.95] mb-8 sm:mb-12 flex flex-col items-center justify-center text-center tracking-normal w-full"
           >
+            {/* SEO Screen-Reader Only Text */}
+            <span className="sr-only">Seven Hills Global Pvt Ltd | Premium Agricultural Exports</span>
+
             {/* Animated SEVEN HILLS - Reduced Glowing White with adjusted diffuse shadow */}
-            <span className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] sm:drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10 w-full xs:whitespace-nowrap">
+            <span aria-hidden="true" className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] sm:drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] uppercase tracking-normal flex flex-wrap justify-center overflow-visible py-0 sm:py-6 relative z-10 w-full xs:whitespace-nowrap">
               {"SEVEN HILLS".split("").map((letter, index) => (
                 <motion.span
                   key={index}
@@ -169,7 +172,7 @@ const HeroSection = () => {
                 </motion.span>
               ))}
             </span>
-            <span className="mt-1 xxs:mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20 w-full xs:whitespace-nowrap">
+            <span aria-hidden="true" className="mt-1 xxs:mt-2 sm:mt-3 lg:mt-4 flex flex-col lg:flex-row items-center justify-center lg:items-baseline lg:gap-8 uppercase z-20 w-full xs:whitespace-nowrap">
               {/* Animated GLOBAL - Full Gold Color with Reduced Glow */}
               <span className="flex overflow-visible text-[#FFD700] font-black drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] sm:drop-shadow-[0_0_20px_rgba(255,215,0,0.6)] py-1 relative z-20 text-[2.8rem] xxs:text-[3.5rem] sm:text-[inherit]">
                 {"GLOBAL".split("").map((letter, index) => (
