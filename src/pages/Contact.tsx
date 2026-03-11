@@ -136,8 +136,8 @@ const Contact = () => {
                                 sevenhillsglobalprivatelimited@gmail.com
                             </a>
                             <p className="text-muted-foreground font-sans mb-1 text-sm font-semibold">Business Inquiries:</p>
-                            <a href="mailto:Sevenhillsexpo7@gmail.com" className="text-sm sm:text-base text-foreground hover:text-gold transition-colors block break-all">
-                                Sevenhillsexpo7@gmail.com
+                            <a href="mailto:Info@sevenhillsglobalpvtltd.com" className="text-sm sm:text-base text-foreground hover:text-gold transition-colors block break-all">
+                                Info@sevenhillsglobalpvtltd.com
                             </a>
                         </div>
                     </motion.div>

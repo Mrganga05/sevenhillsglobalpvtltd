@@ -17,7 +17,7 @@ const ContactSection = () => {
     e.preventDefault();
     const subject = `Quote Request - ${formData.product || "General Inquiry"}`;
     const body = `Name: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AProduct: ${formData.product}%0AMessage: ${formData.message}`;
-    window.location.href = `mailto:Sevenhillsexpo7@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:Info@sevenhillsglobalpvtltd.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -170,8 +170,8 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <span className="block text-xs uppercase tracking-wider text-primary/40 font-bold mb-1">Business Inquiries</span>
-                      <a href="mailto:Sevenhillsexpo7@gmail.com" className="text-sm sm:text-base text-primary/60 font-sans hover:text-primary transition-colors break-all font-medium">
-                        Sevenhillsexpo7@gmail.com
+                      <a href="mailto:Info@sevenhillsglobalpvtltd.com" className="text-sm sm:text-base text-primary/60 font-sans hover:text-primary transition-colors break-all font-medium">
+                        Info@sevenhillsglobalpvtltd.com
                       </a>
                     </div>
                   </div>
