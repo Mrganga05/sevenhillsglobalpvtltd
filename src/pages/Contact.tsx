@@ -30,29 +30,42 @@ const Contact = () => {
         setIsSubmitting(true);
 
         try {
-            await submitInquiry.mutateAsync({
-                name: formData.name,
-                email: formData.email,
-                phone: formData.phone,
-                message: `Company: ${formData.company}\nProduct Interest: ${formData.product || 'None'}\n\n${formData.message}`,
-                status: 'new'
+            const functionUrl = 'https://uguvemllaweahpiqltky.supabase.co/functions/v1/send-contact-email';
+            const formattedMessage = `Phone: ${formData.phone}\nCompany: ${formData.company}\nProduct Interest: ${formData.product || 'None'}\n\nMessage:\n${formData.message}`;
+            
+            const response = await fetch(functionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formattedMessage
+                })
             });
+            
+            const data = await response.json();
 
-            setIsSuccess(true);
-            toast.success("Inquiry submitted successfully!");
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                company: "",
-                product: "",
-                message: "",
-            });
+            if (response.ok && data.success) {
+                setIsSuccess(true);
+                toast.success("Inquiry submitted successfully!");
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    company: "",
+                    product: "",
+                    message: "",
+                });
 
-            setTimeout(() => setIsSuccess(false), 5000);
+                setTimeout(() => setIsSuccess(false), 5000);
+            } else {
+                throw new Error(data.error || 'Failed to send message');
+            }
 
-        } catch (error) {
-            toast.error("Failed to submit inquiry. Please try again or contact us directly.");
+        } catch (error: any) {
+            toast.error(error.message || "Failed to submit inquiry. Please try again or contact us directly.");
         } finally {
             setIsSubmitting(false);
         }

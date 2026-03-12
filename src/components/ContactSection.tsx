@@ -12,12 +12,46 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", product: "", message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Quote Request - ${formData.product || "General Inquiry"}`;
-    const body = `Name: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AProduct: ${formData.product}%0AMessage: ${formData.message}`;
-    window.location.href = `mailto:Info@sevenhillsglobalpvtltd.com?subject=${subject}&body=${body}`;
+    setIsSubmitting(true);
+    setErrorMsg("");
+    
+    try {
+      const functionUrl = 'https://uguvemllaweahpiqltky.supabase.co/functions/v1/send-contact-email';
+      const formattedMessage = `Phone: ${formData.phone}\nProduct: ${formData.product}\n\nMessage:\n${formData.message}`;
+      
+      const response = await fetch(functionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formattedMessage
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", phone: "", product: "", message: "" });
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        throw new Error(data.error || 'Failed to send message');
+      }
+    } catch (error: any) {
+      console.error('Submission Error:', error);
+      setErrorMsg(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -112,12 +146,28 @@ const ContactSection = () => {
                 />
               </div>
 
+              {isSuccess && (
+                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-sm font-semibold text-center mb-4">
+                  Email sent successfully! We will get back to you soon.
+                </div>
+              )}
+              {errorMsg && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-semibold text-center mb-4">
+                  Error: {errorMsg}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full sm:w-auto px-10 gold-gradient-bg text-primary-foreground py-4 rounded-xl font-bold font-sans text-base hover:opacity-90 transition-all duration-300 ease-in-out flex items-center justify-center gap-2 hover:scale-[1.02] shadow-xl group"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto px-10 gold-gradient-bg text-primary-foreground py-4 rounded-xl font-bold font-sans text-base hover:opacity-90 transition-all duration-300 ease-in-out flex items-center justify-center gap-2 hover:scale-[1.02] shadow-xl group disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                Send Inquiry
+                {isSubmitting ? (
+                  <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin rounded-full"></div>
+                ) : (
+                  <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                )}
+                {isSubmitting ? 'Sending...' : 'Send Inquiry'}
               </button>
             </form>
           </motion.div>
