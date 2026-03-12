@@ -1,5 +1,8 @@
+// @ts-ignore
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+// @ts-ignore
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+// @ts-ignore
 import nodemailer from "npm:nodemailer@6.9.9";
 
 const corsHeaders = {
@@ -7,7 +10,8 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-serve(async (req) => {
+// @ts-ignore
+serve(async (req: any) => {
   // 5. Handle CORS preflight request
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -29,7 +33,9 @@ serve(async (req) => {
     }
 
     // Initialize Supabase Client with Service Role Key to bypass RLS
+    // @ts-ignore
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+    // @ts-ignore
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
@@ -44,7 +50,9 @@ serve(async (req) => {
     }
 
     // Grab environment variables
+    // @ts-ignore
     const smtpUser = Deno.env.get("SMTP_USER");
+    // @ts-ignore
     const smtpPass = Deno.env.get("SMTP_PASS");
 
     if (!smtpUser || !smtpPass) {
